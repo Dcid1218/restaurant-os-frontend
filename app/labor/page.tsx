@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import DashboardShell from '@/components/DashboardShell';
+import Badge from '@/components/Badge';
+import EmptyState from '@/components/EmptyState';
 import { apiFetch, getOrgId } from '@/lib/api';
 
 interface Shift {
@@ -23,6 +25,12 @@ interface LaborSummary {
   overtimeHours?: number;
 }
 
+const shiftStatusVariant: Record<string, 'success' | 'neutral' | 'warning'> = {
+  'clocked-in': 'success',
+  scheduled: 'neutral',
+  'clocked-out': 'warning',
+};
+
 export default function LaborPage() {
   const [summary, setSummary] = useState<LaborSummary>({ scheduled: 0, clockedIn: 0, laborPct: 0, laborCost: 0 });
   const [shifts, setShifts] = useState<Shift[]>([]);
@@ -32,6 +40,7 @@ export default function LaborPage() {
   const orgId = getOrgId();
 
   const load = async () => {
+    setLoading(true);
     try {
       const [summaryRes, shiftsRes] = await Promise.all([
         apiFetch(`/labor/overview?period=${view}&organizationId=${orgId || ''}`),
@@ -45,7 +54,9 @@ export default function LaborPage() {
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, [view]);
+  useEffect(() => {
+    load();
+  }, [view]);
 
   const handleClockIn = async (shiftId: string) => {
     try {
@@ -65,111 +76,134 @@ export default function LaborPage() {
     }
   };
 
-  const statusColors: Record<string, string> = {
-    'clocked-in': 'bg-emerald-500/10 text-emerald-400',
-    scheduled: 'bg-slate-700/50 text-slate-400',
-    'clocked-out': 'bg-slate-600/30 text-slate-500',
-  };
+  const laborPctColor = summary.laborPct > 35 ? 'text-danger' : summary.laborPct > 28 ? 'text-warning' : 'text-success';
 
   return (
     <DashboardShell active="Labor">
-      <div className="space-y-6">
-        <div className="flex items-end justify-between">
+      <div className="space-y-5">
+        {/* Header */}
+        <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-white">Labor</h1>
-            <p className="mt-1 text-sm text-slate-400">Shift scheduling and labor cost tracking</p>
+            <h1 className="text-lg font-semibold text-hi">Labor</h1>
+            <p className="text-xs text-lo mt-0.5">Shift scheduling and labor cost tracking</p>
           </div>
-          <div className="flex gap-2">
-            {(['today', 'week'] as const).map(v => (
-              <button key={v} onClick={() => setView(v)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${view === v ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'}`}>
-                {v.charAt(0).toUpperCase() + v.slice(1)}
+          <div className="flex gap-1.5">
+            {(['today', 'week'] as const).map((v) => (
+              <button
+                key={v}
+                onClick={() => setView(v)}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors capitalize ${
+                  view === v ? 'bg-accent text-white' : 'bg-raised text-mid hover:text-hi border border-edge'
+                }`}
+              >
+                {v}
               </button>
             ))}
           </div>
         </div>
 
-        {error && <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 text-sm text-red-400">{error}</div>}
+        {error && (
+          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-danger">{error}</div>
+        )}
 
         {loading ? (
-          <div className="text-center text-slate-500 py-12">Loading labor data...</div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-20 rounded-lg bg-surface border border-rim animate-pulse" />
+            ))}
+          </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                <div className="text-xs uppercase tracking-wider text-slate-400">Scheduled</div>
-                <div className="mt-2 text-2xl font-semibold text-white">{summary.scheduled}</div>
+            {/* Summary cards */}
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+              <div className="bg-surface border border-rim rounded-lg p-5">
+                <div className="text-xs font-medium text-lo uppercase tracking-wider">Scheduled</div>
+                <div className="mt-2 text-2xl font-semibold text-hi">{summary.scheduled}</div>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                <div className="text-xs uppercase tracking-wider text-slate-400">Clocked In</div>
-                <div className="mt-2 text-2xl font-semibold text-emerald-400">{summary.clockedIn}</div>
+              <div className="bg-surface border border-rim rounded-lg p-5">
+                <div className="text-xs font-medium text-lo uppercase tracking-wider">Clocked In</div>
+                <div className="mt-2 text-2xl font-semibold text-success">{summary.clockedIn}</div>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                <div className="text-xs uppercase tracking-wider text-slate-400">Labor %</div>
-                <div className="mt-2 text-2xl font-semibold text-amber-400">{summary.laborPct}%</div>
-                <div className="mt-1 text-xs text-slate-500">target 28%</div>
+              <div className="bg-surface border border-rim rounded-lg p-5">
+                <div className="text-xs font-medium text-lo uppercase tracking-wider">Labor %</div>
+                <div className={`mt-2 text-2xl font-semibold ${laborPctColor}`}>{summary.laborPct}%</div>
+                <div className="text-xs text-lo mt-1">target 28%</div>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                <div className="text-xs uppercase tracking-wider text-slate-400">Labor Cost</div>
-                <div className="mt-2 text-2xl font-semibold text-white">${summary.laborCost.toLocaleString()}</div>
+              <div className="bg-surface border border-rim rounded-lg p-5">
+                <div className="text-xs font-medium text-lo uppercase tracking-wider">Labor Cost</div>
+                <div className="mt-2 text-2xl font-semibold text-hi">${summary.laborCost.toLocaleString()}</div>
               </div>
             </div>
 
+            {/* Additional metrics */}
             {summary.totalHours !== undefined && (
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                  <div className="text-sm font-medium text-slate-200">Total Hours</div>
-                  <div className="mt-2 text-xl font-semibold text-white">{summary.totalHours}h</div>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div className="bg-surface border border-rim rounded-lg p-5">
+                  <div className="text-sm font-medium text-mid">Total Hours</div>
+                  <div className="mt-2 text-xl font-semibold text-hi">{summary.totalHours}h</div>
                 </div>
-                <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                  <div className="text-sm font-medium text-slate-200">Overtime Hours</div>
-                  <div className="mt-2 text-xl font-semibold text-rose-400">{summary.overtimeHours || 0}h</div>
+                <div className="bg-surface border border-rim rounded-lg p-5">
+                  <div className="text-sm font-medium text-mid">Overtime Hours</div>
+                  <div className="mt-2 text-xl font-semibold text-danger">{summary.overtimeHours || 0}h</div>
                 </div>
-                <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-                  <div className="text-sm font-medium text-slate-200">Est. Weekly Cost</div>
-                  <div className="mt-2 text-xl font-semibold text-white">${(summary.laborCost * 7).toLocaleString()}</div>
+                <div className="bg-surface border border-rim rounded-lg p-5">
+                  <div className="text-sm font-medium text-mid">Est. Weekly Cost</div>
+                  <div className="mt-2 text-xl font-semibold text-hi">${(summary.laborCost * 7).toLocaleString()}</div>
                 </div>
               </div>
             )}
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900/50">
-              <div className="border-b border-slate-800 px-5 py-4">
-                <div className="text-sm font-medium text-slate-200">Shifts ({shifts.length})</div>
+            {/* Shifts table */}
+            <div className="bg-surface border border-rim rounded-lg overflow-hidden">
+              <div className="border-b border-rim px-5 py-3.5 flex items-center justify-between">
+                <span className="text-sm font-medium text-hi">Shifts</span>
+                <span className="text-xs text-lo">{shifts.length} total</span>
               </div>
               {shifts.length === 0 ? (
-                <div className="p-8 text-center text-slate-500">No shifts scheduled.</div>
+                <EmptyState title="No shifts scheduled" description="No shifts scheduled for this period." />
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-slate-800 text-left text-xs uppercase tracking-wider text-slate-400">
-                        <th className="px-5 py-3">Employee</th>
-                        <th className="px-5 py-3">Role</th>
-                        <th className="px-5 py-3">Start</th>
-                        <th className="px-5 py-3">End</th>
-                        <th className="px-5 py-3">Hours</th>
-                        <th className="px-5 py-3">Status</th>
-                        <th className="px-5 py-3">Actions</th>
+                      <tr className="border-b border-rim text-xs uppercase tracking-wider text-lo">
+                        <th className="text-left px-5 py-3">Employee</th>
+                        <th className="text-left px-5 py-3">Role</th>
+                        <th className="text-left px-5 py-3">Start</th>
+                        <th className="text-left px-5 py-3">End</th>
+                        <th className="text-left px-5 py-3">Hours</th>
+                        <th className="text-left px-5 py-3">Status</th>
+                        <th className="text-left px-5 py-3">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {shifts.map((s) => (
-                        <tr key={s.id} className="border-b border-slate-800/50 hover:bg-slate-800/30">
-                          <td className="px-5 py-3 text-slate-300">{s.employeeName}</td>
-                          <td className="px-5 py-3 text-slate-400">{s.role}</td>
-                          <td className="px-5 py-3 font-mono text-slate-400">{s.startTime}</td>
-                          <td className="px-5 py-3 font-mono text-slate-400">{s.endTime}</td>
-                          <td className="px-5 py-3 text-slate-400">{s.hours || '—'}</td>
+                        <tr key={s.id} className="border-b border-rim/50 hover:bg-raised/40 transition-colors">
+                          <td className="px-5 py-3 text-mid font-medium">{s.employeeName}</td>
+                          <td className="px-5 py-3 text-lo">{s.role}</td>
+                          <td className="px-5 py-3 font-mono text-xs text-lo">{s.startTime}</td>
+                          <td className="px-5 py-3 font-mono text-xs text-lo">{s.endTime}</td>
+                          <td className="px-5 py-3 text-lo">{s.hours ?? '—'}</td>
                           <td className="px-5 py-3">
-                            <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${statusColors[s.status] ?? 'bg-slate-700 text-slate-300'}`}>
+                            <Badge variant={shiftStatusVariant[s.status] ?? 'neutral'}>
                               {s.status.replace('-', ' ')}
-                            </span>
+                            </Badge>
                           </td>
                           <td className="px-5 py-3">
                             {s.status === 'scheduled' && (
-                              <button onClick={() => handleClockIn(s.id)} className="text-emerald-400 hover:text-emerald-300 text-xs font-medium mr-2">Clock In</button>
+                              <button
+                                onClick={() => handleClockIn(s.id)}
+                                className="text-xs text-success hover:text-hi font-medium transition-colors"
+                              >
+                                Clock In
+                              </button>
                             )}
                             {s.status === 'clocked-in' && (
-                              <button onClick={() => handleClockOut(s.id)} className="text-amber-400 hover:text-amber-300 text-xs font-medium">Clock Out</button>
+                              <button
+                                onClick={() => handleClockOut(s.id)}
+                                className="text-xs text-warning hover:text-hi font-medium transition-colors"
+                              >
+                                Clock Out
+                              </button>
                             )}
                           </td>
                         </tr>

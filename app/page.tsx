@@ -12,45 +12,51 @@ export default function DashboardPage() {
       <div className="space-y-6">
         <div className="flex items-end justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-white">Command center</h1>
-            <p className="mt-1 text-sm text-slate-400">Realtime view for Main St. location</p>
+            <h1 className="text-xl font-semibold text-hi">Command Center</h1>
+            <p className="mt-1 text-sm text-lo">Realtime view · Main St. location</p>
           </div>
-          <div className="text-sm text-slate-400">Last synced just now</div>
+          <div className="text-xs text-lo">Live</div>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <MetricCard title="Revenue Today" value={m.revenue} helper="vs yesterday" trend="+2.1%" accent="emerald" />
+          <MetricCard title="Revenue Today" value={m.revenue} helper="vs yesterday" trend="+2.1%" accent="green" />
           <MetricCard title="Guest Count" value={String(m.guests)} helper="covers" trend="+1.4%" accent="blue" />
           <MetricCard title="Average Ticket" value={m.avgTicket} helper="per guest today" accent="blue" />
           <MetricCard title="Labor %" value={m.laborPct} helper="target 28%" accent="amber" />
-          <MetricCard title="Food Cost %" value={m.foodCostPct} helper="target 31%" accent="rose" />
+          <MetricCard title="Food Cost %" value={m.foodCostPct} helper="target 31%" accent="red" />
           <MetricCard title="Prime Cost %" value={m.primeCostPct} helper="target <60%" accent="amber" />
-          <MetricCard title="Marketing ROI" value={w.marketingROI} helper="trailing 7 days" accent="emerald" />
-          <MetricCard title="Revenue This Week" value={w.revenue} helper={w.vsLastWeek} accent="emerald" />
+          <MetricCard title="Marketing ROI" value={w.marketingROI} helper="trailing 7 days" accent="green" />
+          <MetricCard title="Revenue This Week" value={w.revenue} helper={w.vsLastWeek} accent="green" />
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-            <div className="text-sm font-medium text-slate-200">Top selling items</div>
-            <ul className="mt-3 space-y-2 text-sm text-slate-400">
+          <div className="rounded-lg border border-rim bg-surface p-5">
+            <div className="text-sm font-medium text-hi">Top Selling Items</div>
+            <ul className="mt-3 space-y-2">
               {m.topItems.map((x) => (
-                <li key={x} className="flex items-center justify-between">
+                <li key={x} className="flex items-center justify-between text-sm text-mid">
                   <span>{x}</span>
-                  <span className="text-slate-500">—</span>
+                  <span className="text-lo">—</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-            <div className="text-sm font-medium text-slate-200">Labor snapshot</div>
-            <div className="mt-3 text-sm text-slate-400">Clocked in now: 9</div>
-            <div className="mt-1 text-sm text-slate-400">Scheduled today: 18</div>
+          <div className="rounded-lg border border-rim bg-surface p-5">
+            <div className="text-sm font-medium text-hi">Labor Snapshot</div>
+            <div className="mt-3 space-y-1.5 text-sm text-mid">
+              <div>Clocked in now: <span className="text-success font-medium">9</span></div>
+              <div>Scheduled today: <span className="text-hi font-medium">18</span></div>
+            </div>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
-            <div className="text-sm font-medium text-slate-200">Alerts</div>
-            <div className="mt-3 space-y-2 text-sm">
-              <div className="rounded-md bg-amber-500/10 p-3 text-amber-300">Low inventory: House-made ranch</div>
-              <div className="rounded-md bg-rose-500/10 p-3 text-rose-300">Overtime risk: prep station</div>
+          <div className="rounded-lg border border-rim bg-surface p-5">
+            <div className="text-sm font-medium text-hi">Alerts</div>
+            <div className="mt-3 space-y-2">
+              <div className="border-l-2 border-warning rounded-r-md bg-warning/5 px-3 py-2 text-xs text-warning">
+                Low inventory: House-made ranch
+              </div>
+              <div className="border-l-2 border-danger rounded-r-md bg-danger/5 px-3 py-2 text-xs text-danger">
+                Overtime risk: prep station
+              </div>
             </div>
           </div>
         </div>

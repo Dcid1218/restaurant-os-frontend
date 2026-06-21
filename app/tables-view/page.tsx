@@ -14,71 +14,158 @@ interface TableData {
 
 const API = 'http://localhost:4000/api/v1';
 
-const STATUS_STYLES: Record<string, string> = {
-  available: 'bg-emerald-500/20 border-emerald-500 text-emerald-400',
-  occupied: 'bg-red-500/20 border-red-500 text-red-400',
-  reserved: 'bg-yellow-500/20 border-yellow-500 text-yellow-400',
-  dirty: 'bg-slate-600/20 border-slate-500 text-slate-400',
+const STATUS_CONFIG: Record<
+  string,
+  { label: string; border: string; bg: string; text: string; dot: string }
+> = {
+  available: {
+    label: 'Available',
+    border: 'border-success/40',
+    bg: 'bg-success/5 hover:bg-success/10',
+    text: 'text-success',
+    dot: 'bg-success',
+  },
+  occupied: {
+    label: 'Occupied',
+    border: 'border-danger/40',
+    bg: 'bg-danger/5 hover:bg-danger/10',
+    text: 'text-danger',
+    dot: 'bg-danger',
+  },
+  reserved: {
+    label: 'Reserved',
+    border: 'border-warning/40',
+    bg: 'bg-warning/5 hover:bg-warning/10',
+    text: 'text-warning',
+    dot: 'bg-warning',
+  },
+  dirty: {
+    label: 'Needs Cleaning',
+    border: 'border-edge',
+    bg: 'bg-raised/50 hover:bg-raised',
+    text: 'text-lo',
+    dot: 'bg-lo',
+  },
 };
+
+function SeatsIcon() {
+  return (
+    <svg className="w-3 h-3 inline mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+    </svg>
+  );
+}
 
 export default function TablesViewPage() {
   const [tables, setTables] = useState<TableData[]>([]);
 
   const load = () => {
-    fetch(`${API}/tables`).then(r => r.json()).then(setTables).catch(() => {
-      setTables([
-        { id: '1', label: 'T1', seats: 2, status: 'available', section: { name: 'Main' }, orders: [] },
-        { id: '2', label: 'T2', seats: 4, status: 'occupied', section: { name: 'Main' }, orders: [{ id: 'o1' }] },
-        { id: '3', label: 'T3', seats: 4, status: 'available', section: { name: 'Main' }, orders: [] },
-        { id: '4', label: 'T4', seats: 6, status: 'reserved', section: { name: 'Main' }, orders: [] },
-        { id: '5', label: 'T5', seats: 2, status: 'occupied', section: { name: 'Patio' }, orders: [{ id: 'o2' }] },
-        { id: '6', label: 'T6', seats: 4, status: 'dirty', section: { name: 'Patio' }, orders: [] },
-        { id: '7', label: 'T7', seats: 8, status: 'available', section: { name: 'Private' }, orders: [] },
-        { id: '8', label: 'T8', seats: 4, status: 'available', section: { name: 'Bar' }, orders: [] },
-      ]);
-    });
+    fetch(`${API}/tables`)
+      .then((r) => r.json())
+      .then(setTables)
+      .catch(() => {
+        setTables([
+          { id: '1', label: 'T1', seats: 2, status: 'available', section: { name: 'Main' }, orders: [] },
+          { id: '2', label: 'T2', seats: 4, status: 'occupied', section: { name: 'Main' }, orders: [{ id: 'o1' }] },
+          { id: '3', label: 'T3', seats: 4, status: 'available', section: { name: 'Main' }, orders: [] },
+          { id: '4', label: 'T4', seats: 6, status: 'reserved', section: { name: 'Main' }, orders: [] },
+          { id: '5', label: 'T5', seats: 2, status: 'occupied', section: { name: 'Patio' }, orders: [{ id: 'o2' }] },
+          { id: '6', label: 'T6', seats: 4, status: 'dirty', section: { name: 'Patio' }, orders: [] },
+          { id: '7', label: 'T7', seats: 8, status: 'available', section: { name: 'Private' }, orders: [] },
+          { id: '8', label: 'T8', seats: 4, status: 'available', section: { name: 'Bar' }, orders: [] },
+        ]);
+      });
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const cycleStatus = async (id: string, current: string) => {
-    const flow: Record<string, string> = { available: 'occupied', occupied: 'dirty', dirty: 'available', reserved: 'available' };
+    const flow: Record<string, string> = {
+      available: 'occupied',
+      occupied: 'dirty',
+      dirty: 'available',
+      reserved: 'available',
+    };
     const next = flow[current] || 'available';
-    await fetch(`${API}/tables/${id}/status`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: next }) });
+    await fetch(`${API}/tables/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: next }),
+    });
     load();
   };
 
-  const sections = [...new Set(tables.map(t => t.section.name))];
+  const sections = [...new Set(tables.map((t) => t.section.name))];
+
+  const statusSummary = Object.entries(STATUS_CONFIG).map(([key, cfg]) => ({
+    key,
+    label: cfg.label,
+    dot: cfg.dot,
+    count: tables.filter((t) => t.status === key).length,
+  }));
 
   return (
     <DashboardShell active="Tables">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold">🪑 Floor Plan</h1>
-        <div className="flex gap-4 text-sm">
-          {Object.entries(STATUS_STYLES).map(([status, style]) => (
-            <div key={status} className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded-full border ${style}`} />
-              <span className="capitalize text-slate-400">{status}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {sections.map(section => (
-        <div key={section} className="mb-8">
-          <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">{section}</h2>
-          <div className="grid grid-cols-4 gap-4">
-            {tables.filter(t => t.section.name === section).map(table => (
-              <button key={table.id} onClick={() => cycleStatus(table.id, table.status)}
-                className={`border-2 rounded-xl p-4 text-center transition hover:scale-105 ${STATUS_STYLES[table.status] || ''}`}>
-                <div className="text-2xl font-bold">{table.label}</div>
-                <div className="text-xs opacity-60 mt-1">{table.seats} seats</div>
-                {table.orders.length > 0 && <div className="text-xs mt-1">🔴 Active order</div>}
-              </button>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-lg font-semibold text-hi">Floor Plan</h1>
+            <p className="text-xs text-lo mt-0.5">Click a table to cycle its status</p>
+          </div>
+          {/* Legend */}
+          <div className="flex items-center gap-4 flex-wrap">
+            {statusSummary.map((s) => (
+              <div key={s.key} className="flex items-center gap-1.5">
+                <div className={`w-2 h-2 rounded-full ${s.dot}`} />
+                <span className="text-xs text-mid">{s.label}</span>
+                <span className="text-xs text-lo">({s.count})</span>
+              </div>
             ))}
           </div>
         </div>
-      ))}
+
+        {/* Sections */}
+        {sections.map((section) => {
+          const sectionTables = tables.filter((t) => t.section.name === section);
+          return (
+            <div key={section}>
+              <div className="flex items-center gap-3 mb-3">
+                <h2 className="text-xs font-semibold text-lo uppercase tracking-widest">{section}</h2>
+                <div className="flex-1 h-px bg-rim" />
+                <span className="text-xs text-lo">{sectionTables.length} tables</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+                {sectionTables.map((table) => {
+                  const cfg = STATUS_CONFIG[table.status] ?? STATUS_CONFIG.available;
+                  return (
+                    <button
+                      key={table.id}
+                      onClick={() => cycleStatus(table.id, table.status)}
+                      className={`border-2 rounded-xl p-4 text-center transition-all duration-150 hover:scale-105 active:scale-95 ${cfg.border} ${cfg.bg}`}
+                    >
+                      <div className="text-2xl font-bold text-hi">{table.label}</div>
+                      <div className="text-xs text-lo mt-1">
+                        <SeatsIcon />
+                        {table.seats}
+                      </div>
+                      <div className={`text-xs font-medium mt-2 ${cfg.text}`}>{cfg.label}</div>
+                      {table.orders.length > 0 && (
+                        <div className="mt-1.5 flex items-center justify-center gap-1">
+                          <div className="w-1.5 h-1.5 rounded-full bg-danger animate-pulse" />
+                          <span className="text-xs text-danger">Active</span>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </DashboardShell>
   );
 }

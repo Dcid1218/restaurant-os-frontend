@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import DashboardShell from '@/components/DashboardShell';
+import Badge from '@/components/Badge';
+import EmptyState from '@/components/EmptyState';
 
 interface TicketItem {
   id: string;
@@ -25,38 +27,54 @@ interface Ticket {
 
 const API = 'http://localhost:4000/api/v1';
 
-const STATUS_COLORS: Record<string, string> = {
-  PENDING: 'border-yellow-500 bg-yellow-500/10',
-  IN_PROGRESS: 'border-blue-500 bg-blue-500/10',
-  READY: 'border-emerald-500 bg-emerald-500/10',
-  COMPLETED: 'border-slate-600 bg-slate-800/50',
-  CANCELLED: 'border-red-500 bg-red-500/10',
+const TICKET_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success' | 'neutral' | 'danger'; border: string; bg: string }> = {
+  PENDING: { badge: 'warning', border: 'border-warning/40', bg: 'bg-warning/5' },
+  IN_PROGRESS: { badge: 'info', border: 'border-info/40', bg: 'bg-info/5' },
+  READY: { badge: 'success', border: 'border-success/40', bg: 'bg-success/5' },
+  COMPLETED: { badge: 'neutral', border: 'border-rim', bg: 'bg-surface/50' },
+  CANCELLED: { badge: 'danger', border: 'border-danger/40', bg: 'bg-danger/5' },
 };
 
-const ITEM_STATUS_COLORS: Record<string, string> = {
-  PENDING: 'bg-yellow-500/20 text-yellow-400',
-  FIRED: 'bg-orange-500/20 text-orange-400',
-  IN_PROGRESS: 'bg-blue-500/20 text-blue-400',
-  READY: 'bg-emerald-500/20 text-emerald-400',
-  COMPLETED: 'bg-slate-600/20 text-slate-400',
-  CANCELLED: 'bg-red-500/20 text-red-400',
+const ITEM_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success' | 'neutral' | 'danger' }> = {
+  PENDING: { badge: 'warning' },
+  FIRED: { badge: 'warning' },
+  IN_PROGRESS: { badge: 'info' },
+  READY: { badge: 'success' },
+  COMPLETED: { badge: 'neutral' },
+  CANCELLED: { badge: 'danger' },
 };
+
+function KitchenIcon() {
+  return (
+    <svg className="w-6 h-6 text-lo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a9 9 0 00-9 9c0 2.4.94 4.58 2.47 6.2L12 22l6.53-4.8A8.96 8.96 0 0021 11a9 9 0 00-9-9z" />
+    </svg>
+  );
+}
 
 export default function KDSPage() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [filter, setFilter] = useState<string>('active');
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
   const loadTickets = useCallback(() => {
     const status = filter === 'active' ? '' : filter.toUpperCase();
     fetch(`${API}/kds/tickets${status ? `?status=${status}` : ''}`)
-      .then(r => r.json())
-      .then(data => setTickets(data))
+      .then((r) => r.json())
+      .then((data) => {
+        setTickets(data);
+        setLastRefresh(new Date());
+      })
       .catch(() => {
-        // Demo data
         setTickets([
           {
-            id: 't1', ticketNumber: 'KT-001', status: 'PENDING', priority: 1,
-            tableLabel: 'Table 5', serverName: 'John D.', firedAt: new Date().toISOString(),
+            id: 't1',
+            ticketNumber: 'KT-001',
+            status: 'PENDING',
+            priority: 1,
+            tableLabel: 'Table 5',
+            serverName: 'John D.',
+            firedAt: new Date().toISOString(),
             order: { orderNumber: '20260621-0001' },
             items: [
               { id: 'ti1', menuItem: { name: 'Classic Burger' }, quantity: 2, status: 'PENDING', notes: 'No pickles' },
@@ -64,8 +82,13 @@ export default function KDSPage() {
             ],
           },
           {
-            id: 't2', ticketNumber: 'KT-002', status: 'IN_PROGRESS', priority: 0,
-            tableLabel: 'Table 2', serverName: 'Sarah M.', firedAt: new Date(Date.now() - 300000).toISOString(),
+            id: 't2',
+            ticketNumber: 'KT-002',
+            status: 'IN_PROGRESS',
+            priority: 0,
+            tableLabel: 'Table 2',
+            serverName: 'Sarah M.',
+            firedAt: new Date(Date.now() - 300000).toISOString(),
             order: { orderNumber: '20260621-0002' },
             items: [
               { id: 'ti3', menuItem: { name: 'Steak Frites' }, quantity: 1, status: 'IN_PROGRESS', notes: 'Medium rare' },
@@ -108,83 +131,152 @@ export default function KDSPage() {
     return `${m}:${s.toString().padStart(2, '0')}`;
   };
 
+  const filters = ['active', 'pending', 'in_progress', 'ready', 'completed'];
+
   return (
     <DashboardShell active="KDS">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold">🍳 Kitchen Display System</h1>
-        <div className="flex gap-2">
-          {['active', 'pending', 'in_progress', 'ready', 'completed'].map(f => (
-            <button key={f} onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 rounded text-sm capitalize transition ${filter === f ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
-              {f.replace('_', ' ')}
-            </button>
-          ))}
+      <div className="space-y-4">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <h1 className="text-lg font-semibold text-hi">Kitchen Display</h1>
+            <p className="text-xs text-lo">
+              Auto-refreshing · Last update:{' '}
+              {lastRefresh.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            </p>
+          </div>
+          <div className="flex gap-1.5 flex-wrap">
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium capitalize transition-colors duration-150 ${
+                  filter === f
+                    ? 'bg-accent text-white'
+                    : 'bg-raised text-mid hover:text-hi border border-edge'
+                }`}
+              >
+                {f.replace('_', ' ')}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {tickets.length === 0 ? (
-        <div className="text-center text-slate-600 py-20">No tickets — waiting for orders</div>
-      ) : (
-        <div className="grid grid-cols-3 gap-4">
-          {tickets.map(ticket => (
-            <div key={ticket.id} className={`border-2 rounded-xl p-4 ${STATUS_COLORS[ticket.status] || 'border-slate-700'}`}>
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <span className="font-bold text-lg">{ticket.ticketNumber}</span>
-                  {ticket.tableLabel && <span className="ml-2 text-sm opacity-70">{ticket.tableLabel}</span>}
-                </div>
-                <div className="text-right">
-                  <div className="text-xs opacity-60">{elapsed(ticket.firedAt)}</div>
-                  <div className="text-xs font-medium">{ticket.serverName}</div>
-                </div>
-              </div>
+        {/* Tickets */}
+        {tickets.length === 0 ? (
+          <EmptyState
+            title="No tickets"
+            description="Waiting for orders to come in"
+            icon={<KitchenIcon />}
+          />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {tickets.map((ticket) => {
+              const cfg = TICKET_STATUS_CONFIG[ticket.status] ?? TICKET_STATUS_CONFIG.PENDING;
+              const elapsedTime = elapsed(ticket.firedAt);
+              const [elapsedMin] = elapsedTime.split(':').map(Number);
+              const isUrgent = elapsedMin >= 10;
 
-              <div className="space-y-2 mb-4">
-                {ticket.items.map(item => (
-                  <div key={item.id} className="flex items-center justify-between bg-black/20 rounded-lg px-3 py-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm">{item.quantity}x</span>
-                      <span className="text-sm">{item.menuItem.name}</span>
-                      {item.notes && <span className="text-xs opacity-50">({item.notes})</span>}
+              return (
+                <div key={ticket.id} className={`border-2 rounded-xl p-4 flex flex-col gap-3 ${cfg.border} ${cfg.bg}`}>
+                  {/* Ticket header */}
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="text-xl font-bold text-hi tracking-tight">{ticket.ticketNumber}</div>
+                      {ticket.tableLabel && (
+                        <div className="text-xs text-mid">{ticket.tableLabel}</div>
+                      )}
                     </div>
-                    <button onClick={() => {
-                      const next = item.status === 'PENDING' ? 'IN_PROGRESS' : item.status === 'IN_PROGRESS' ? 'READY' : 'COMPLETED';
-                      updateItemStatus(item.id, next);
-                    }} className={`text-xs px-2 py-0.5 rounded font-medium ${ITEM_STATUS_COLORS[item.status] || ''}`}>
-                      {item.status.replace('_', ' ')}
+                    <div className="text-right flex flex-col items-end gap-1">
+                      <span className={`text-lg font-mono font-semibold ${isUrgent ? 'text-danger' : 'text-mid'}`}>
+                        {elapsedTime}
+                      </span>
+                      <Badge variant={cfg.badge}>{ticket.status.replace('_', ' ')}</Badge>
+                    </div>
+                  </div>
+
+                  {ticket.serverName && (
+                    <div className="text-xs text-lo">Server: {ticket.serverName}</div>
+                  )}
+
+                  {/* Items */}
+                  <div className="space-y-1.5">
+                    {ticket.items.map((item) => {
+                      const itemCfg = ITEM_STATUS_CONFIG[item.status] ?? ITEM_STATUS_CONFIG.PENDING;
+                      return (
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between bg-black/20 rounded-lg px-3 py-2"
+                        >
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className="text-base font-bold text-hi shrink-0">{item.quantity}×</span>
+                            <div className="min-w-0">
+                              <div className="text-sm font-medium text-hi truncate">{item.menuItem.name}</div>
+                              {item.notes && (
+                                <div className="text-xs text-lo">{item.notes}</div>
+                              )}
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => {
+                              const next =
+                                item.status === 'PENDING'
+                                  ? 'IN_PROGRESS'
+                                  : item.status === 'IN_PROGRESS'
+                                  ? 'READY'
+                                  : 'COMPLETED';
+                              updateItemStatus(item.id, next);
+                            }}
+                            className="ml-2 shrink-0"
+                          >
+                            <Badge variant={itemCfg.badge}>{item.status.replace('_', ' ')}</Badge>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2 mt-auto pt-2">
+                    {ticket.status === 'PENDING' && (
+                      <button
+                        onClick={() => updateTicketStatus(ticket.id, 'IN_PROGRESS')}
+                        className="flex-1 py-2 rounded-lg bg-info/10 hover:bg-info text-info hover:text-white text-sm font-semibold border border-info/30 transition-colors"
+                      >
+                        Start
+                      </button>
+                    )}
+                    {ticket.status === 'IN_PROGRESS' && (
+                      <button
+                        onClick={() => updateTicketStatus(ticket.id, 'READY')}
+                        className="flex-1 py-2 rounded-lg bg-success/10 hover:bg-success text-success hover:text-white text-sm font-semibold border border-success/30 transition-colors"
+                      >
+                        Ready
+                      </button>
+                    )}
+                    {ticket.status === 'READY' && (
+                      <button
+                        onClick={() => updateTicketStatus(ticket.id, 'COMPLETED')}
+                        className="flex-1 py-2 rounded-lg bg-raised hover:bg-edge text-mid hover:text-hi text-sm font-semibold border border-edge transition-colors"
+                      >
+                        Complete
+                      </button>
+                    )}
+                    <button
+                      onClick={() => updateTicketStatus(ticket.id, 'CANCELLED')}
+                      className="px-3 py-2 rounded-lg bg-danger/5 hover:bg-danger text-danger hover:text-white text-sm border border-danger/20 transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </button>
                   </div>
-                ))}
-              </div>
-
-              <div className="flex gap-2">
-                {ticket.status === 'PENDING' && (
-                  <button onClick={() => updateTicketStatus(ticket.id, 'IN_PROGRESS')}
-                    className="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-sm font-bold transition">
-                    Start
-                  </button>
-                )}
-                {ticket.status === 'IN_PROGRESS' && (
-                  <button onClick={() => updateTicketStatus(ticket.id, 'READY')}
-                    className="flex-1 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-sm font-bold transition">
-                    Ready
-                  </button>
-                )}
-                {ticket.status === 'READY' && (
-                  <button onClick={() => updateTicketStatus(ticket.id, 'COMPLETED')}
-                    className="flex-1 py-2 rounded-lg bg-slate-600 hover:bg-slate-500 text-sm font-bold transition">
-                    Complete
-                  </button>
-                )}
-                <button onClick={() => updateTicketStatus(ticket.id, 'CANCELLED')}
-                  className="px-3 py-2 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-sm transition">
-                  ✕
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </DashboardShell>
   );
 }
