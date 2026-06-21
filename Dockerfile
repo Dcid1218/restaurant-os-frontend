@@ -14,4 +14,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=5 \
   CMD curl -f http://localhost:3000/ || exit 1
 
-CMD ["npx", "next", "start", "-p", "3000"]
+CMD ["sh", "-c", "npx next start -p ${PORT:-3000}"]
