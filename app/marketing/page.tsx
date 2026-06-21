@@ -51,7 +51,7 @@ const channelIcons: Record<string, React.ReactNode> = {
 };
 
 const inputCls =
-  'w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors';
+  'w-full bg-di border border-dedge rounded-lg px-3 py-2 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors';
 
 export default function MarketingPage() {
   const [summary, setSummary] = useState<MarketingSummary>({ totalSpend: 0, roi: 0, impressions: 0, conversions: 0 });
@@ -121,8 +121,8 @@ export default function MarketingPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-[#f0f0f5]">Marketing</h1>
-            <p className="text-xs text-[#6a6a80] mt-0.5">Campaign performance and ROI tracking</p>
+            <h1 className="text-lg font-semibold text-dhi">Marketing</h1>
+            <p className="text-xs text-dlo mt-0.5">Campaign performance and ROI tracking</p>
           </div>
           <Button onClick={() => setShowForm(!showForm)} variant={showForm ? 'secondary' : 'primary'}>
             {showForm ? 'Cancel' : (
@@ -143,38 +143,38 @@ export default function MarketingPage() {
         {loading ? (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="h-20 rounded-lg bg-[#12121a] border border-[#2a2a3a] animate-pulse" />
+              <div key={i} className="h-20 rounded-lg bg-ds border border-drim animate-pulse" />
             ))}
           </div>
         ) : (
           <>
             {/* Summary */}
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-              <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-                <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Total Spend</div>
-                <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">${summary.totalSpend.toLocaleString()}</div>
+              <div className="bg-ds border border-drim rounded-lg p-5">
+                <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Spend</div>
+                <div className="mt-2 text-2xl font-semibold text-dhi">${summary.totalSpend.toLocaleString()}</div>
               </div>
-              <div className="bg-[#12121a] border border-success/30 rounded-lg p-5 bg-emerald-500/5">
+              <div className="bg-ds border border-success/30 rounded-lg p-5 bg-emerald-500/5">
                 <div className="text-xs font-medium text-emerald-500 uppercase tracking-wider">ROI</div>
                 <div className="mt-2 text-2xl font-semibold text-emerald-500">{summary.roi}x</div>
               </div>
-              <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-                <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Impressions</div>
-                <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">{summary.impressions.toLocaleString()}</div>
+              <div className="bg-ds border border-drim rounded-lg p-5">
+                <div className="text-xs font-medium text-dlo uppercase tracking-wider">Impressions</div>
+                <div className="mt-2 text-2xl font-semibold text-dhi">{summary.impressions.toLocaleString()}</div>
               </div>
-              <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-                <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Conversions</div>
-                <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">{summary.conversions}</div>
+              <div className="bg-ds border border-drim rounded-lg p-5">
+                <div className="text-xs font-medium text-dlo uppercase tracking-wider">Conversions</div>
+                <div className="mt-2 text-2xl font-semibold text-dhi">{summary.conversions}</div>
               </div>
             </div>
 
             {/* New campaign form */}
             {showForm && (
-              <form onSubmit={handleCreate} className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5 space-y-4">
-                <div className="text-sm font-medium text-[#f0f0f5]">New Campaign</div>
+              <form onSubmit={handleCreate} className="bg-ds border border-drim rounded-lg p-5 space-y-4">
+                <div className="text-sm font-medium text-dhi">New Campaign</div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Name</label>
+                    <label className="block text-xs text-dmid mb-1.5">Name</label>
                     <input
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -183,7 +183,7 @@ export default function MarketingPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Channel</label>
+                    <label className="block text-xs text-dmid mb-1.5">Channel</label>
                     <select
                       value={form.channel}
                       onChange={(e) => setForm({ ...form, channel: e.target.value })}
@@ -198,7 +198,7 @@ export default function MarketingPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Budget</label>
+                    <label className="block text-xs text-dmid mb-1.5">Budget</label>
                     <input
                       type="number"
                       step="0.01"
@@ -208,7 +208,7 @@ export default function MarketingPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Status</label>
+                    <label className="block text-xs text-dmid mb-1.5">Status</label>
                     <select
                       value={form.status}
                       onChange={(e) => setForm({ ...form, status: e.target.value })}
@@ -226,10 +226,10 @@ export default function MarketingPage() {
             )}
 
             {/* Campaigns table */}
-            <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg overflow-hidden">
-              <div className="border-b border-[#2a2a3a] px-5 py-3.5 flex items-center justify-between">
-                <span className="text-sm font-medium text-[#f0f0f5]">Campaigns</span>
-                <span className="text-xs text-[#6a6a80]">{campaigns.length} total</span>
+            <div className="bg-ds border border-drim rounded-lg overflow-hidden">
+              <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
+                <span className="text-sm font-medium text-dhi">Campaigns</span>
+                <span className="text-xs text-dlo">{campaigns.length} total</span>
               </div>
               {campaigns.length === 0 ? (
                 <EmptyState
@@ -240,7 +240,7 @@ export default function MarketingPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-[#2a2a3a] text-xs uppercase tracking-wider text-[#6a6a80]">
+                      <tr className="border-b border-drim text-xs uppercase tracking-wider text-dlo">
                         <th className="text-left px-5 py-3">Campaign</th>
                         <th className="text-left px-5 py-3">Channel</th>
                         <th className="text-left px-5 py-3">Spend</th>
@@ -252,16 +252,16 @@ export default function MarketingPage() {
                     </thead>
                     <tbody>
                       {campaigns.map((c) => (
-                        <tr key={c.id} className="border-b border-[#2a2a3a]/50 hover:bg-[#22222f]/40 transition-colors">
-                          <td className="px-5 py-3 text-[#a0a0b8] font-medium">{c.name}</td>
+                        <tr key={c.id} className="border-b border-drim/50 hover:bg-dr/40 transition-colors">
+                          <td className="px-5 py-3 text-dmid font-medium">{c.name}</td>
                           <td className="px-5 py-3">
-                            <div className="flex items-center gap-2 text-[#6a6a80]">
+                            <div className="flex items-center gap-2 text-dlo">
                               {channelIcons[c.channel] ?? null}
                               <span>{c.channel}</span>
                             </div>
                           </td>
-                          <td className="px-5 py-3 text-[#6a6a80]">${(c.spend || 0).toLocaleString()}</td>
-                          <td className="px-5 py-3 text-[#6a6a80]">{c.conversions || 0}</td>
+                          <td className="px-5 py-3 text-dlo">${(c.spend || 0).toLocaleString()}</td>
+                          <td className="px-5 py-3 text-dlo">{c.conversions || 0}</td>
                           <td className={`px-5 py-3 font-semibold ${roiColor(c.roi || 0)}`}>
                             {c.roi || 0}x
                           </td>
@@ -273,7 +273,7 @@ export default function MarketingPage() {
                           <td className="px-5 py-3">
                             <button
                               onClick={() => handleDelete(c.id)}
-                              className="text-xs text-[#6a6a80] hover:text-red-500 transition-colors font-medium"
+                              className="text-xs text-dlo hover:text-red-500 transition-colors font-medium"
                             >
                               Delete
                             </button>

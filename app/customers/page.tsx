@@ -29,7 +29,7 @@ const tagVariant: Record<string, 'warning' | 'info' | 'neutral' | 'danger' | 'su
 };
 
 const inputCls =
-  'w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors';
+  'w-full bg-di border border-dedge rounded-lg px-3 py-2 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors';
 
 export default function CustomersPage() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -107,8 +107,8 @@ export default function CustomersPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-[#f0f0f5]">Customers</h1>
-            <p className="text-xs text-[#6a6a80] mt-0.5">CRM, segments, and lifetime value tracking</p>
+            <h1 className="text-lg font-semibold text-dhi">Customers</h1>
+            <p className="text-xs text-dlo mt-0.5">CRM, segments, and lifetime value tracking</p>
           </div>
           <Button onClick={() => setShowForm(!showForm)} variant={showForm ? 'secondary' : 'primary'}>
             {showForm ? 'Cancel' : (
@@ -128,28 +128,28 @@ export default function CustomersPage() {
 
         {/* Summary */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-            <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Total Customers</div>
-            <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">{totalCustomers.toLocaleString()}</div>
+          <div className="bg-ds border border-drim rounded-lg p-5">
+            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Customers</div>
+            <div className="mt-2 text-2xl font-semibold text-dhi">{totalCustomers.toLocaleString()}</div>
           </div>
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-            <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">VIP Members</div>
+          <div className="bg-ds border border-drim rounded-lg p-5">
+            <div className="text-xs font-medium text-dlo uppercase tracking-wider">VIP Members</div>
             <div className="mt-2 text-2xl font-semibold text-amber-500">{vipCount}</div>
           </div>
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-            <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Total Lifetime Value</div>
+          <div className="bg-ds border border-drim rounded-lg p-5">
+            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Lifetime Value</div>
             <div className="mt-2 text-2xl font-semibold text-emerald-500">${totalValue.toLocaleString()}</div>
           </div>
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-            <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Avg Lifetime Value</div>
-            <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">${avgValue}</div>
+          <div className="bg-ds border border-drim rounded-lg p-5">
+            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Avg Lifetime Value</div>
+            <div className="mt-2 text-2xl font-semibold text-dhi">${avgValue}</div>
           </div>
         </div>
 
         {/* Add form */}
         {showForm && (
-          <form onSubmit={handleCreate} className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5 space-y-4">
-            <div className="text-sm font-medium text-[#f0f0f5]">New Customer</div>
+          <form onSubmit={handleCreate} className="bg-ds border border-drim rounded-lg p-5 space-y-4">
+            <div className="text-sm font-medium text-dhi">New Customer</div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { key: 'firstName', label: 'First Name', required: true },
@@ -159,7 +159,7 @@ export default function CustomersPage() {
                 { key: 'tags', label: 'Tags (comma-separated)', placeholder: 'VIP, Regular' },
               ].map(({ key, label, ...rest }) => (
                 <div key={key}>
-                  <label className="block text-xs text-[#a0a0b8] mb-1.5">{label}</label>
+                  <label className="block text-xs text-dmid mb-1.5">{label}</label>
                   <input
                     value={form[key as keyof typeof form]}
                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
@@ -176,31 +176,31 @@ export default function CustomersPage() {
         )}
 
         {/* Table */}
-        <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg overflow-hidden">
-          <div className="border-b border-[#2a2a3a] px-5 py-3.5 flex items-center justify-between">
-            <span className="text-sm font-medium text-[#f0f0f5]">All Customers ({filtered.length})</span>
+        <div className="bg-ds border border-drim rounded-lg overflow-hidden">
+          <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
+            <span className="text-sm font-medium text-dhi">All Customers ({filtered.length})</span>
             <div className="relative">
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#6a6a80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-dlo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <circle cx="11" cy="11" r="8" /><path strokeLinecap="round" d="m21 21-4.35-4.35" />
               </svg>
               <input
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                 placeholder="Search..."
-                className="bg-[#1a1a26] border border-[#3a3a4f] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 w-44 transition-colors"
+                className="bg-di border border-dedge rounded-lg pl-8 pr-3 py-1.5 text-xs text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 w-44 transition-colors"
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="p-8 text-center text-[#6a6a80] text-sm">Loading customers...</div>
+            <div className="p-8 text-center text-dlo text-sm">Loading customers...</div>
           ) : filtered.length === 0 ? (
             <EmptyState title="No customers found" description="Add your first customer or try a different search." />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-[#2a2a3a] text-xs uppercase tracking-wider text-[#6a6a80]">
+                  <tr className="border-b border-drim text-xs uppercase tracking-wider text-dlo">
                     <th className="text-left px-5 py-3">Name</th>
                     <th className="text-left px-5 py-3">Email</th>
                     <th className="text-left px-5 py-3">Phone</th>
@@ -211,15 +211,15 @@ export default function CustomersPage() {
                 </thead>
                 <tbody>
                   {paged.map((c) => (
-                    <tr key={c.id} className="border-b border-[#2a2a3a]/50 hover:bg-[#22222f]/40 transition-colors">
+                    <tr key={c.id} className="border-b border-drim/50 hover:bg-dr/40 transition-colors">
                       <td className="px-5 py-3">
                         <div className="flex items-center gap-3">
                           <Avatar name={`${c.firstName} ${c.lastName}`} size="sm" />
-                          <span className="text-[#a0a0b8] font-medium">{c.firstName} {c.lastName}</span>
+                          <span className="text-dmid font-medium">{c.firstName} {c.lastName}</span>
                         </div>
                       </td>
-                      <td className="px-5 py-3 text-[#6a6a80]">{c.email || '—'}</td>
-                      <td className="px-5 py-3 text-[#6a6a80]">{c.phone || '—'}</td>
+                      <td className="px-5 py-3 text-dlo">{c.email || '—'}</td>
+                      <td className="px-5 py-3 text-dlo">{c.phone || '—'}</td>
                       <td className="px-5 py-3 text-emerald-500 font-medium">
                         ${(c.lifetimeValue || 0).toLocaleString()}
                       </td>
@@ -235,7 +235,7 @@ export default function CustomersPage() {
                       <td className="px-5 py-3">
                         <button
                           onClick={() => handleDelete(c.id)}
-                          className="text-xs text-[#6a6a80] hover:text-red-500 transition-colors font-medium"
+                          className="text-xs text-dlo hover:text-red-500 transition-colors font-medium"
                         >
                           Delete
                         </button>
@@ -246,8 +246,8 @@ export default function CustomersPage() {
               </table>
 
               {totalPages > 1 && (
-                <div className="flex items-center justify-between border-t border-[#2a2a3a] px-5 py-3">
-                  <span className="text-xs text-[#6a6a80]">
+                <div className="flex items-center justify-between border-t border-drim px-5 py-3">
+                  <span className="text-xs text-dlo">
                     {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of{' '}
                     {filtered.length}
                   </span>
@@ -255,14 +255,14 @@ export default function CustomersPage() {
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={safePage <= 1}
-                      className="px-3 py-1.5 rounded-md text-xs bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f] disabled:opacity-40 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs bg-dr text-dmid hover:text-dhi border border-dedge disabled:opacity-40 transition-colors"
                     >
                       ← Prev
                     </button>
                     <button
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={safePage >= totalPages}
-                      className="px-3 py-1.5 rounded-md text-xs bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f] disabled:opacity-40 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs bg-dr text-dmid hover:text-dhi border border-dedge disabled:opacity-40 transition-colors"
                     >
                       Next →
                     </button>

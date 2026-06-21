@@ -36,7 +36,7 @@ const roleVariant: Record<string, 'warning' | 'info' | 'neutral'> = {
 };
 
 const inputCls =
-  'w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors';
+  'w-full bg-di border border-dedge rounded-lg px-3 py-2 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors';
 
 export default function UsersPage() {
   const [users, setUsers] = useState<OrgUser[]>([]);
@@ -100,8 +100,8 @@ export default function UsersPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-[#f0f0f5]">Team & Organization</h1>
-            <p className="text-xs text-[#6a6a80] mt-0.5">Manage users, roles, and organization settings</p>
+            <h1 className="text-lg font-semibold text-dhi">Team & Organization</h1>
+            <p className="text-xs text-dlo mt-0.5">Manage users, roles, and organization settings</p>
           </div>
           {tab === 'users' && (
             <Button onClick={() => setShowForm(!showForm)} variant={showForm ? 'secondary' : 'primary'}>
@@ -122,7 +122,7 @@ export default function UsersPage() {
         )}
 
         {/* Tabs */}
-        <div className="flex gap-1 border-b border-[#2a2a3a]">
+        <div className="flex gap-1 border-b border-drim">
           {[
             { key: 'users', label: `Team Members (${users.length})` },
             { key: 'org', label: 'Organization Settings' },
@@ -133,7 +133,7 @@ export default function UsersPage() {
               className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
                 tab === key
                   ? 'text-indigo-500 border-accent'
-                  : 'text-[#6a6a80] border-transparent hover:text-[#a0a0b8]'
+                  : 'text-dlo border-transparent hover:text-dmid'
               }`}
             >
               {label}
@@ -142,28 +142,28 @@ export default function UsersPage() {
         </div>
 
         {loading ? (
-          <div className="h-48 rounded-lg bg-[#12121a] border border-[#2a2a3a] animate-pulse" />
+          <div className="h-48 rounded-lg bg-ds border border-drim animate-pulse" />
         ) : tab === 'users' ? (
           <>
             {/* Invite form */}
             {showForm && (
-              <form onSubmit={handleCreate} className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5 space-y-4">
-                <div className="text-sm font-medium text-[#f0f0f5]">Invite New Team Member</div>
+              <form onSubmit={handleCreate} className="bg-ds border border-drim rounded-lg p-5 space-y-4">
+                <div className="text-sm font-medium text-dhi">Invite New Team Member</div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">First Name</label>
+                    <label className="block text-xs text-dmid mb-1.5">First Name</label>
                     <input value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} required className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Last Name</label>
+                    <label className="block text-xs text-dmid mb-1.5">Last Name</label>
                     <input value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} required className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Email</label>
+                    <label className="block text-xs text-dmid mb-1.5">Email</label>
                     <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Role</label>
+                    <label className="block text-xs text-dmid mb-1.5">Role</label>
                     <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className={inputCls}>
                       <option value="STAFF">Staff</option>
                       <option value="MANAGER">Manager</option>
@@ -171,7 +171,7 @@ export default function UsersPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Temporary Password</label>
+                    <label className="block text-xs text-dmid mb-1.5">Temporary Password</label>
                     <input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required className={inputCls} />
                   </div>
                 </div>
@@ -182,9 +182,9 @@ export default function UsersPage() {
             )}
 
             {/* Users table */}
-            <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg overflow-hidden">
-              <div className="border-b border-[#2a2a3a] px-5 py-3.5">
-                <span className="text-sm font-medium text-[#f0f0f5]">Team Members</span>
+            <div className="bg-ds border border-drim rounded-lg overflow-hidden">
+              <div className="border-b border-drim px-5 py-3.5">
+                <span className="text-sm font-medium text-dhi">Team Members</span>
               </div>
               {users.length === 0 ? (
                 <EmptyState
@@ -195,7 +195,7 @@ export default function UsersPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-[#2a2a3a] text-xs uppercase tracking-wider text-[#6a6a80]">
+                      <tr className="border-b border-drim text-xs uppercase tracking-wider text-dlo">
                         <th className="text-left px-5 py-3">Name</th>
                         <th className="text-left px-5 py-3">Email</th>
                         <th className="text-left px-5 py-3">Role</th>
@@ -206,14 +206,14 @@ export default function UsersPage() {
                     </thead>
                     <tbody>
                       {users.map((u) => (
-                        <tr key={u.id} className="border-b border-[#2a2a3a]/50 hover:bg-[#22222f]/40 transition-colors">
+                        <tr key={u.id} className="border-b border-drim/50 hover:bg-dr/40 transition-colors">
                           <td className="px-5 py-3">
                             <div className="flex items-center gap-3">
                               <Avatar name={`${u.firstName} ${u.lastName}`} size="sm" />
-                              <span className="text-[#a0a0b8] font-medium">{u.firstName} {u.lastName}</span>
+                              <span className="text-dmid font-medium">{u.firstName} {u.lastName}</span>
                             </div>
                           </td>
-                          <td className="px-5 py-3 text-[#6a6a80]">{u.email}</td>
+                          <td className="px-5 py-3 text-dlo">{u.email}</td>
                           <td className="px-5 py-3">
                             <Badge variant={roleVariant[u.role] ?? 'neutral'}>{u.role}</Badge>
                           </td>
@@ -222,14 +222,14 @@ export default function UsersPage() {
                               {u.isActive !== false ? 'Active' : 'Inactive'}
                             </Badge>
                           </td>
-                          <td className="px-5 py-3 text-[#6a6a80] text-xs">
+                          <td className="px-5 py-3 text-dlo text-xs">
                             {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString() : 'Never'}
                           </td>
                           <td className="px-5 py-3">
                             {u.isActive !== false && (
                               <button
                                 onClick={() => handleDeactivate(u.id)}
-                                className="text-xs text-[#6a6a80] hover:text-red-500 transition-colors font-medium"
+                                className="text-xs text-dlo hover:text-red-500 transition-colors font-medium"
                               >
                                 Deactivate
                               </button>
@@ -245,7 +245,7 @@ export default function UsersPage() {
           </>
         ) : (
           /* Org Settings */
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-6 space-y-6">
+          <div className="bg-ds border border-drim rounded-lg p-6 space-y-6">
             {org ? (
               <>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -258,19 +258,19 @@ export default function UsersPage() {
                     { label: 'Organization ID', value: org.id, mono: true },
                   ].map(({ label, value, mono }) => (
                     <div key={label}>
-                      <div className="text-xs font-medium text-[#6a6a80] mb-1.5">{label}</div>
-                      <div className={`text-sm text-[#a0a0b8] ${mono ? 'font-mono text-xs' : ''}`}>{value}</div>
+                      <div className="text-xs font-medium text-dlo mb-1.5">{label}</div>
+                      <div className={`text-sm text-dmid ${mono ? 'font-mono text-xs' : ''}`}>{value}</div>
                     </div>
                   ))}
                 </div>
-                <div className="pt-5 border-t border-[#2a2a3a]">
-                  <p className="text-xs text-[#6a6a80]">
+                <div className="pt-5 border-t border-drim">
+                  <p className="text-xs text-dlo">
                     To update organization settings, contact support or use the API directly.
                   </p>
                 </div>
               </>
             ) : (
-              <div className="text-sm text-[#6a6a80]">Organization details not available.</div>
+              <div className="text-sm text-dlo">Organization details not available.</div>
             )}
           </div>
         )}

@@ -19,7 +19,7 @@ interface InventoryItem {
 }
 
 const inputCls =
-  'w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors';
+  'w-full bg-di border border-dedge rounded-lg px-3 py-2 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors';
 
 export default function InventoryPage() {
   const [items, setItems] = useState<InventoryItem[]>([]);
@@ -118,8 +118,8 @@ export default function InventoryPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-[#f0f0f5]">Inventory</h1>
-            <p className="text-xs text-[#6a6a80] mt-0.5">Stock levels, categories, and reorder alerts</p>
+            <h1 className="text-lg font-semibold text-dhi">Inventory</h1>
+            <p className="text-xs text-dlo mt-0.5">Stock levels, categories, and reorder alerts</p>
           </div>
           <Button onClick={() => setShowForm(!showForm)} variant={showForm ? 'secondary' : 'primary'}>
             {showForm ? 'Cancel' : (
@@ -139,21 +139,21 @@ export default function InventoryPage() {
 
         {/* Summary cards */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-            <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Total Items</div>
-            <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">{items.length}</div>
+          <div className="bg-ds border border-drim rounded-lg p-5">
+            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Items</div>
+            <div className="mt-2 text-2xl font-semibold text-dhi">{items.length}</div>
           </div>
-          <div className="bg-[#12121a] border border-warning/30 rounded-lg p-5 bg-warning/5">
+          <div className="bg-ds border border-warning/30 rounded-lg p-5 bg-warning/5">
             <div className="text-xs font-medium text-amber-500 uppercase tracking-wider">Low Stock</div>
             <div className="mt-2 text-2xl font-semibold text-amber-500">{lowStock.length}</div>
           </div>
-          <div className="bg-[#12121a] border border-danger/30 rounded-lg p-5 bg-danger/5">
+          <div className="bg-ds border border-danger/30 rounded-lg p-5 bg-danger/5">
             <div className="text-xs font-medium text-red-500 uppercase tracking-wider">Out of Stock</div>
             <div className="mt-2 text-2xl font-semibold text-red-500">{outOfStock.length}</div>
           </div>
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5">
-            <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">Total Value</div>
-            <div className="mt-2 text-2xl font-semibold text-[#f0f0f5]">${totalValue.toLocaleString()}</div>
+          <div className="bg-ds border border-drim rounded-lg p-5">
+            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Value</div>
+            <div className="mt-2 text-2xl font-semibold text-dhi">${totalValue.toLocaleString()}</div>
           </div>
         </div>
 
@@ -161,9 +161,9 @@ export default function InventoryPage() {
         {showForm && (
           <form
             onSubmit={handleCreate}
-            className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5 space-y-4"
+            className="bg-ds border border-drim rounded-lg p-5 space-y-4"
           >
-            <div className="text-sm font-medium text-[#f0f0f5]">New Inventory Item</div>
+            <div className="text-sm font-medium text-dhi">New Inventory Item</div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { key: 'name', label: 'Name', placeholder: 'Tomatoes', required: true },
@@ -175,7 +175,7 @@ export default function InventoryPage() {
                 { key: 'supplier', label: 'Supplier', placeholder: 'Sysco' },
               ].map(({ key, label, ...rest }) => (
                 <div key={key}>
-                  <label className="block text-xs text-[#a0a0b8] mb-1.5">{label}</label>
+                  <label className="block text-xs text-dmid mb-1.5">{label}</label>
                   <input
                     value={form[key as keyof typeof form]}
                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
@@ -203,7 +203,7 @@ export default function InventoryPage() {
               key={key}
               onClick={() => { setFilter(key); setPage(1); }}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                filter === key ? active : 'bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f]'
+                filter === key ? active : 'bg-dr text-dmid hover:text-dhi border border-dedge'
               }`}
             >
               {label}
@@ -212,20 +212,20 @@ export default function InventoryPage() {
         </div>
 
         {/* Table */}
-        <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg overflow-hidden">
-          <div className="border-b border-[#2a2a3a] px-5 py-3.5 flex items-center justify-between">
-            <span className="text-sm font-medium text-[#f0f0f5]">Inventory Items</span>
-            <span className="text-xs text-[#6a6a80]">{filtered.length} items</span>
+        <div className="bg-ds border border-drim rounded-lg overflow-hidden">
+          <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
+            <span className="text-sm font-medium text-dhi">Inventory Items</span>
+            <span className="text-xs text-dlo">{filtered.length} items</span>
           </div>
           {loading ? (
-            <div className="p-8 text-center text-[#6a6a80] text-sm">Loading inventory...</div>
+            <div className="p-8 text-center text-dlo text-sm">Loading inventory...</div>
           ) : filtered.length === 0 ? (
             <EmptyState title="No items found" description="Add your first inventory item above." />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-[#2a2a3a] text-xs uppercase tracking-wider text-[#6a6a80]">
+                  <tr className="border-b border-drim text-xs uppercase tracking-wider text-dlo">
                     <th className="text-left px-5 py-3">Item</th>
                     <th className="text-left px-5 py-3">Category</th>
                     <th className="text-left px-5 py-3">On Hand</th>
@@ -237,9 +237,9 @@ export default function InventoryPage() {
                 </thead>
                 <tbody>
                   {paged.map((item) => (
-                    <tr key={item.id} className="border-b border-[#2a2a3a]/50 hover:bg-[#22222f]/40 transition-colors">
-                      <td className="px-5 py-3 text-[#a0a0b8] font-medium">{item.name}</td>
-                      <td className="px-5 py-3 text-[#6a6a80]">{item.category}</td>
+                    <tr key={item.id} className="border-b border-drim/50 hover:bg-dr/40 transition-colors">
+                      <td className="px-5 py-3 text-dmid font-medium">{item.name}</td>
+                      <td className="px-5 py-3 text-dlo">{item.category}</td>
                       <td className="px-5 py-3">
                         <span
                           className={
@@ -247,16 +247,16 @@ export default function InventoryPage() {
                               ? 'text-red-500'
                               : item.onHand <= item.reorderPoint
                               ? 'text-amber-500'
-                              : 'text-[#a0a0b8]'
+                              : 'text-dmid'
                           }
                         >
                           {item.onHand} {item.unit}
                         </span>
                       </td>
-                      <td className="px-5 py-3 text-[#6a6a80]">
+                      <td className="px-5 py-3 text-dlo">
                         {item.reorderPoint} {item.unit}
                       </td>
-                      <td className="px-5 py-3 text-[#6a6a80]">${(item.cost || 0).toFixed(2)}</td>
+                      <td className="px-5 py-3 text-dlo">${(item.cost || 0).toFixed(2)}</td>
                       <td className="px-5 py-3">
                         <Badge variant={stockVariant(item)}>
                           {item.onHand <= 0 ? 'Out' : item.onHand <= item.reorderPoint ? 'Low' : 'OK'}
@@ -265,7 +265,7 @@ export default function InventoryPage() {
                       <td className="px-5 py-3">
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="text-xs text-[#6a6a80] hover:text-red-500 transition-colors font-medium"
+                          className="text-xs text-dlo hover:text-red-500 transition-colors font-medium"
                         >
                           Delete
                         </button>
@@ -276,8 +276,8 @@ export default function InventoryPage() {
               </table>
 
               {totalPages > 1 && (
-                <div className="flex items-center justify-between border-t border-[#2a2a3a] px-5 py-3">
-                  <span className="text-xs text-[#6a6a80]">
+                <div className="flex items-center justify-between border-t border-drim px-5 py-3">
+                  <span className="text-xs text-dlo">
                     {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of{' '}
                     {filtered.length}
                   </span>
@@ -285,14 +285,14 @@ export default function InventoryPage() {
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={safePage <= 1}
-                      className="px-3 py-1.5 rounded-md text-xs bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f] disabled:opacity-40 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs bg-dr text-dmid hover:text-dhi border border-dedge disabled:opacity-40 transition-colors"
                     >
                       ← Prev
                     </button>
                     <button
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={safePage >= totalPages}
-                      className="px-3 py-1.5 rounded-md text-xs bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f] disabled:opacity-40 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs bg-dr text-dmid hover:text-dhi border border-dedge disabled:opacity-40 transition-colors"
                     >
                       Next →
                     </button>

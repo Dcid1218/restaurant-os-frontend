@@ -31,7 +31,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-db flex flex-col items-center justify-center p-4">
       {/* Background gradient */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
@@ -45,12 +45,12 @@ export default function LoginPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-1.2 5.4-5 9-9 9 4 0 7.8 3.6 9 9 1.2-5.4 5-9 9-9-4 0-7.8-3.6-9-9z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-semibold text-[#f0f0f5]">RestaurantOS</h1>
-          <p className="text-sm text-[#6a6a80] mt-1">Sign in to your workspace</p>
+          <h1 className="text-2xl font-semibold text-dhi">RestaurantOS</h1>
+          <p className="text-sm text-dlo mt-1">Sign in to your workspace</p>
         </div>
 
         {/* Card */}
-        <div className="bg-[#12121a] border border-[#2a2a3a] rounded-xl p-6 shadow-2xl">
+        <div className="bg-ds border border-drim rounded-xl p-6 shadow-2xl">
           {error && (
             <div className="mb-4 flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg px-4 py-3">
               <svg className="w-4 h-4 text-red-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -62,7 +62,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-[#a0a0b8] mb-1.5" htmlFor="email">
+              <label className="block text-xs font-medium text-dmid mb-1.5" htmlFor="email">
                 Email
               </label>
               <input
@@ -72,12 +72,12 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@restaurant.com"
                 required
-                className="w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-md px-3 py-2.5 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors duration-150"
+                className="w-full bg-di border border-dedge rounded-md px-3 py-2.5 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors duration-150"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#a0a0b8] mb-1.5" htmlFor="password">
+              <label className="block text-xs font-medium text-dmid mb-1.5" htmlFor="password">
                 Password
               </label>
               <input
@@ -87,7 +87,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-md px-3 py-2.5 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors duration-150"
+                className="w-full bg-di border border-dedge rounded-md px-3 py-2.5 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors duration-150"
               />
             </div>
 
@@ -111,7 +111,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-xs text-[#6a6a80] mt-6">RestaurantOS v1.0</p>
+        <p className="text-center text-xs text-dlo mt-6">RestaurantOS v1.0</p>
       </div>
     </div>
   );

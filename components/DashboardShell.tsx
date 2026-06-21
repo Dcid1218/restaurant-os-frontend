@@ -138,7 +138,7 @@ export default function DashboardShell({
   const userName = user ? `${user.firstName} ${user.lastName}` : 'User';
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-[#f0f0f5]">
+    <div className="min-h-screen bg-db text-dhi">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -149,23 +149,23 @@ export default function DashboardShell({
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-60 flex flex-col border-r border-[#2a2a3a] bg-[#12121a] transition-transform duration-200 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-60 flex flex-col border-r border-drim bg-ds transition-transform duration-200 lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Logo */}
-        <div className="h-14 flex items-center justify-between px-5 border-b border-[#2a2a3a] shrink-0">
+        <div className="h-14 flex items-center justify-between px-5 border-b border-drim shrink-0">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-md bg-indigo-500/20 flex items-center justify-center">
               <svg className="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-1.2 5.4-5 9-9 9 4 0 7.8 3.6 9 9 1.2-5.4 5-9 9-9-4 0-7.8-3.6-9-9z" />
               </svg>
             </div>
-            <span className="text-sm font-semibold tracking-tight text-[#f0f0f5]">RestaurantOS</span>
+            <span className="text-sm font-semibold tracking-tight text-dhi">RestaurantOS</span>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden w-6 h-6 flex items-center justify-center text-[#6a6a80] hover:text-[#f0f0f5] transition-colors"
+            className="lg:hidden w-6 h-6 flex items-center justify-center text-dlo hover:text-dhi transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -185,10 +185,10 @@ export default function DashboardShell({
                 className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-150 ${
                   isActive
                     ? 'bg-indigo-500/10 text-indigo-500 font-medium'
-                    : 'text-[#a0a0b8] hover:bg-[#22222f] hover:text-[#f0f0f5]'
+                    : 'text-dmid hover:bg-dr hover:text-dhi'
                 }`}
               >
-                <span className={isActive ? 'text-indigo-500' : 'text-[#6a6a80]'}>{item.icon}</span>
+                <span className={isActive ? 'text-indigo-500' : 'text-dlo'}>{item.icon}</span>
                 <span>{item.label}</span>
               </a>
             );
@@ -196,16 +196,16 @@ export default function DashboardShell({
         </nav>
 
         {/* User footer */}
-        <div className="p-3 border-t border-[#2a2a3a] shrink-0">
+        <div className="p-3 border-t border-drim shrink-0">
           <div className="flex items-center gap-3 px-2 py-2">
             <Avatar name={userName} size="sm" />
             <div className="flex-1 min-w-0">
-              <div className="text-xs font-medium text-[#f0f0f5] truncate">{userName}</div>
-              <div className="text-xs text-[#6a6a80] truncate">{user?.role}</div>
+              <div className="text-xs font-medium text-dhi truncate">{userName}</div>
+              <div className="text-xs text-dlo truncate">{user?.role}</div>
             </div>
             <button
               onClick={logout}
-              className="text-[#6a6a80] hover:text-red-500 transition-colors"
+              className="text-dlo hover:text-red-500 transition-colors"
               title="Sign out"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -219,29 +219,29 @@ export default function DashboardShell({
       {/* Main content */}
       <main className="lg:ml-60">
         {/* Top header */}
-        <header className="sticky top-0 z-30 h-14 border-b border-[#2a2a3a] bg-[#12121a]/80 backdrop-blur-md flex items-center justify-between px-4 lg:px-6">
+        <header className="sticky top-0 z-30 h-14 border-b border-drim bg-ds/80 backdrop-blur-md flex items-center justify-between px-4 lg:px-6">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden w-8 h-8 flex items-center justify-center rounded-md text-[#6a6a80] hover:text-[#f0f0f5] hover:bg-[#22222f] transition-colors"
+              className="lg:hidden w-8 h-8 flex items-center justify-center rounded-md text-dlo hover:text-dhi hover:bg-dr transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-            <span className="text-sm text-[#6a6a80] hidden sm:block">
+            <span className="text-sm text-dlo hidden sm:block">
               {active}
             </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#22222f] border border-[#2a2a3a]">
-              <svg className="w-3.5 h-3.5 text-[#6a6a80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md bg-dr border border-drim">
+              <svg className="w-3.5 h-3.5 text-dlo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <circle cx="11" cy="11" r="8" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.35-4.35" />
               </svg>
-              <span className="text-xs text-[#6a6a80]">Search...</span>
-              <kbd className="text-xs text-[#6a6a80] bg-[#1a1a26] px-1 rounded">⌘K</kbd>
+              <span className="text-xs text-dlo">Search...</span>
+              <kbd className="text-xs text-dlo bg-di px-1 rounded">⌘K</kbd>
             </div>
             <Avatar name={userName} size="sm" />
           </div>

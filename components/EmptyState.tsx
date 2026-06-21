@@ -8,7 +8,7 @@ type EmptyStateProps = {
 
 function DefaultIcon() {
   return (
-    <svg className="w-6 h-6 text-[#6a6a80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="w-6 h-6 text-dlo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -21,12 +21,12 @@ function DefaultIcon() {
 export default function EmptyState({ title, description, icon }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="mb-4 w-12 h-12 rounded-full bg-[#22222f] flex items-center justify-center border border-[#2a2a3a]">
+      <div className="mb-4 w-12 h-12 rounded-full bg-dr flex items-center justify-center border border-drim">
         {icon ?? <DefaultIcon />}
       </div>
-      <h3 className="text-sm font-medium text-[#f0f0f5]">{title}</h3>
+      <h3 className="text-sm font-medium text-dhi">{title}</h3>
       {description && (
-        <p className="mt-1 text-xs text-[#6a6a80] max-w-xs">{description}</p>
+        <p className="mt-1 text-xs text-dlo max-w-xs">{description}</p>
       )}
     </div>
   );

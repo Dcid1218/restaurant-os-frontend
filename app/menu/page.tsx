@@ -105,7 +105,7 @@ export default function MenuPage() {
 
   const filtered = activeCategory === 'all' ? items : items.filter((i) => i.category.name === activeCategory);
 
-  const inputCls = 'w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors';
+  const inputCls = 'w-full bg-di border border-dedge rounded-lg px-3 py-2 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors';
 
   return (
     <DashboardShell active="Menu">
@@ -113,8 +113,8 @@ export default function MenuPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-[#f0f0f5]">Menu Management</h1>
-            <p className="text-xs text-[#6a6a80] mt-0.5">{items.length} items across {categories.length} categories</p>
+            <h1 className="text-lg font-semibold text-dhi">Menu Management</h1>
+            <p className="text-xs text-dlo mt-0.5">{items.length} items across {categories.length} categories</p>
           </div>
           <Button
             onClick={() => {
@@ -136,12 +136,12 @@ export default function MenuPage() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(activeCategory === cat.name ? 'all' : cat.name)}
-              className={`bg-[#12121a] border rounded-lg p-3 text-left transition-colors ${
-                activeCategory === cat.name ? 'border-accent bg-indigo-500/5' : 'border-[#2a2a3a] hover:border-[#3a3a4f]'
+              className={`bg-ds border rounded-lg p-3 text-left transition-colors ${
+                activeCategory === cat.name ? 'border-accent bg-indigo-500/5' : 'border-drim hover:border-dedge'
               }`}
             >
-              <div className="text-sm font-medium text-[#f0f0f5]">{cat.name}</div>
-              <div className="text-xs text-[#6a6a80] mt-0.5">{cat._count.items} items</div>
+              <div className="text-sm font-medium text-dhi">{cat.name}</div>
+              <div className="text-xs text-dlo mt-0.5">{cat._count.items} items</div>
             </button>
           ))}
         </div>
@@ -151,7 +151,7 @@ export default function MenuPage() {
           <button
             onClick={() => setActiveCategory('all')}
             className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              activeCategory === 'all' ? 'bg-indigo-500 text-white' : 'bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f]'
+              activeCategory === 'all' ? 'bg-indigo-500 text-white' : 'bg-dr text-dmid hover:text-dhi border border-dedge'
             }`}
           >
             All ({items.length})
@@ -163,7 +163,7 @@ export default function MenuPage() {
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                 activeCategory === cat.name
                   ? 'bg-indigo-500 text-white'
-                  : 'bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f]'
+                  : 'bg-dr text-dmid hover:text-dhi border border-dedge'
               }`}
             >
               {cat.name}
@@ -172,10 +172,10 @@ export default function MenuPage() {
         </div>
 
         {/* Items table */}
-        <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg overflow-hidden">
-          <div className="border-b border-[#2a2a3a] px-5 py-3.5 flex items-center justify-between">
-            <span className="text-sm font-medium text-[#f0f0f5]">Items</span>
-            <span className="text-xs text-[#6a6a80]">{filtered.length} results</span>
+        <div className="bg-ds border border-drim rounded-lg overflow-hidden">
+          <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
+            <span className="text-sm font-medium text-dhi">Items</span>
+            <span className="text-xs text-dlo">{filtered.length} results</span>
           </div>
           {filtered.length === 0 ? (
             <EmptyState title="No items found" description="Try selecting a different category or add your first item." />
@@ -183,7 +183,7 @@ export default function MenuPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-[#2a2a3a] text-xs uppercase tracking-wider text-[#6a6a80]">
+                  <tr className="border-b border-drim text-xs uppercase tracking-wider text-dlo">
                     <th className="text-left px-5 py-3">Item</th>
                     <th className="text-left px-5 py-3">Category</th>
                     <th className="text-right px-5 py-3">Price</th>
@@ -194,11 +194,11 @@ export default function MenuPage() {
                 </thead>
                 <tbody>
                   {filtered.map((item) => (
-                    <tr key={item.id} className="border-b border-[#2a2a3a]/50 hover:bg-[#22222f]/40 transition-colors group">
+                    <tr key={item.id} className="border-b border-drim/50 hover:bg-dr/40 transition-colors group">
                       <td className="px-5 py-3">
-                        <div className="font-medium text-[#f0f0f5]">{item.name}</div>
+                        <div className="font-medium text-dhi">{item.name}</div>
                         {item.description && (
-                          <div className="text-xs text-[#6a6a80]">{item.description}</div>
+                          <div className="text-xs text-dlo">{item.description}</div>
                         )}
                       </td>
                       <td className="px-5 py-3">
@@ -207,7 +207,7 @@ export default function MenuPage() {
                       <td className="px-5 py-3 text-right text-emerald-500 font-medium">
                         ${item.price.toFixed(2)}
                       </td>
-                      <td className="px-5 py-3 text-right text-[#6a6a80]">
+                      <td className="px-5 py-3 text-right text-dlo">
                         {item.cost ? `$${item.cost.toFixed(2)}` : '—'}
                       </td>
                       <td className="px-5 py-3 text-center">
@@ -218,7 +218,7 @@ export default function MenuPage() {
                       <td className="px-5 py-3 text-right">
                         <button
                           onClick={() => edit(item)}
-                          className="text-xs text-[#6a6a80] hover:text-indigo-500 transition-colors font-medium opacity-0 group-hover:opacity-100"
+                          className="text-xs text-dlo hover:text-indigo-500 transition-colors font-medium opacity-0 group-hover:opacity-100"
                         >
                           Edit
                         </button>
@@ -239,14 +239,14 @@ export default function MenuPage() {
           onClick={() => setShowForm(false)}
         >
           <div
-            className="bg-[#12121a] border border-[#3a3a4f] rounded-xl p-6 w-full max-w-md shadow-2xl"
+            className="bg-ds border border-dedge rounded-xl p-6 w-full max-w-md shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-base font-semibold text-[#f0f0f5]">{editing ? 'Edit Item' : 'New Menu Item'}</h2>
+              <h2 className="text-base font-semibold text-dhi">{editing ? 'Edit Item' : 'New Menu Item'}</h2>
               <button
                 onClick={() => setShowForm(false)}
-                className="text-[#6a6a80] hover:text-[#f0f0f5] transition-colors"
+                className="text-dlo hover:text-dhi transition-colors"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -256,7 +256,7 @@ export default function MenuPage() {
 
             <div className="space-y-3">
               <div>
-                <label className="block text-xs text-[#a0a0b8] mb-1.5">Name</label>
+                <label className="block text-xs text-dmid mb-1.5">Name</label>
                 <input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -265,7 +265,7 @@ export default function MenuPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-[#a0a0b8] mb-1.5">Description</label>
+                <label className="block text-xs text-dmid mb-1.5">Description</label>
                 <input
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -275,7 +275,7 @@ export default function MenuPage() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-[#a0a0b8] mb-1.5">Price</label>
+                  <label className="block text-xs text-dmid mb-1.5">Price</label>
                   <input
                     type="number"
                     step="0.01"
@@ -286,7 +286,7 @@ export default function MenuPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-[#a0a0b8] mb-1.5">Cost</label>
+                  <label className="block text-xs text-dmid mb-1.5">Cost</label>
                   <input
                     type="number"
                     step="0.01"
@@ -298,7 +298,7 @@ export default function MenuPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs text-[#a0a0b8] mb-1.5">Category</label>
+                <label className="block text-xs text-dmid mb-1.5">Category</label>
                 <select
                   value={form.categoryId}
                   onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
