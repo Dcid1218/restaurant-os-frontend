@@ -12,10 +12,10 @@ export default function DashboardPage() {
       <div className="space-y-6">
         <div className="flex items-end justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-dhi">Command Center</h1>
-            <p className="mt-1 text-sm text-dlo">Realtime view · Main St. location</p>
+            <h1 className="text-xl font-semibold text-white">Command Center</h1>
+            <p className="mt-1 text-sm text-slate-500">Realtime view · Main St. location</p>
           </div>
-          <div className="text-xs text-dlo">Live</div>
+          <div className="text-xs text-slate-500">Live</div>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -30,26 +30,26 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <div className="rounded-lg border border-drim bg-ds p-5">
-            <div className="text-sm font-medium text-dhi">Top Selling Items</div>
+          <div className="rounded-lg border border-slate-700 bg-slate-900 p-5">
+            <div className="text-sm font-medium text-white">Top Selling Items</div>
             <ul className="mt-3 space-y-2">
               {m.topItems.map((x) => (
-                <li key={x} className="flex items-center justify-between text-sm text-dmid">
+                <li key={x} className="flex items-center justify-between text-sm text-slate-400">
                   <span>{x}</span>
-                  <span className="text-dlo">—</span>
+                  <span className="text-slate-500">—</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-lg border border-drim bg-ds p-5">
-            <div className="text-sm font-medium text-dhi">Labor Snapshot</div>
-            <div className="mt-3 space-y-1.5 text-sm text-dmid">
+          <div className="rounded-lg border border-slate-700 bg-slate-900 p-5">
+            <div className="text-sm font-medium text-white">Labor Snapshot</div>
+            <div className="mt-3 space-y-1.5 text-sm text-slate-400">
               <div>Clocked in now: <span className="text-emerald-500 font-medium">9</span></div>
-              <div>Scheduled today: <span className="text-dhi font-medium">18</span></div>
+              <div>Scheduled today: <span className="text-white font-medium">18</span></div>
             </div>
           </div>
-          <div className="rounded-lg border border-drim bg-ds p-5">
-            <div className="text-sm font-medium text-dhi">Alerts</div>
+          <div className="rounded-lg border border-slate-700 bg-slate-900 p-5">
+            <div className="text-sm font-medium text-white">Alerts</div>
             <div className="mt-3 space-y-2">
               <div className="border-l-2 border-warning rounded-r-md bg-warning/5 px-3 py-2 text-xs text-amber-500">
                 Low inventory: House-made ranch

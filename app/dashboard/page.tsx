@@ -116,12 +116,12 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-dhi">Command Center</h1>
-            <p className="mt-0.5 text-sm text-dlo">Live overview · Main St. location</p>
+            <h1 className="text-xl font-semibold text-white">Command Center</h1>
+            <p className="mt-0.5 text-sm text-slate-500">Live overview · Main St. location</p>
           </div>
           <button
             onClick={load}
-            className="flex items-center gap-1.5 text-xs text-dlo hover:text-dhi transition-colors px-3 py-1.5 rounded-md hover:bg-dr border border-transparent hover:border-drim"
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-white transition-colors px-3 py-1.5 rounded-md hover:bg-slate-700 border border-transparent hover:border-slate-700"
           >
             <RefreshIcon />
             Refresh
@@ -131,7 +131,7 @@ export default function DashboardPage() {
         {loading ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-24 rounded-lg bg-ds border border-drim animate-pulse" />
+              <div key={i} className="h-24 rounded-lg bg-slate-900 border border-slate-700 animate-pulse" />
             ))}
           </div>
         ) : (
@@ -139,8 +139,8 @@ export default function DashboardPage() {
             {/* Metric cards */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {metrics.map((m) => (
-                <div key={m.label} className="relative overflow-hidden rounded-lg border border-drim bg-ds p-5">
-                  <div className="text-xs font-medium text-dlo uppercase tracking-wider">{m.label}</div>
+                <div key={m.label} className="relative overflow-hidden rounded-lg border border-slate-700 bg-slate-900 p-5">
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">{m.label}</div>
                   <div className={`mt-2 text-2xl font-semibold tabular-nums ${accentTextMap[m.accent]}`}>
                     {m.value}
                   </div>
@@ -151,20 +151,20 @@ export default function DashboardPage() {
             {/* Bottom grid */}
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {/* Recent Orders */}
-              <div className="rounded-lg border border-drim bg-ds overflow-hidden">
-                <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
-                  <span className="text-sm font-medium text-dhi">Recent Orders</span>
-                  <span className="text-xs text-dlo">{stats.recentOrders.length} orders</span>
+              <div className="rounded-lg border border-slate-700 bg-slate-900 overflow-hidden">
+                <div className="border-b border-slate-700 px-5 py-3.5 flex items-center justify-between">
+                  <span className="text-sm font-medium text-white">Recent Orders</span>
+                  <span className="text-xs text-slate-500">{stats.recentOrders.length} orders</span>
                 </div>
                 {stats.recentOrders.length === 0 ? (
-                  <div className="px-5 py-10 text-center text-sm text-dlo">No orders yet</div>
+                  <div className="px-5 py-10 text-center text-sm text-slate-500">No orders yet</div>
                 ) : (
-                  <div className="divide-y divide-drim">
+                  <div className="divide-y divide-slate-700">
                     {stats.recentOrders.map((o) => (
-                      <div key={o.id} className="flex items-center justify-between px-5 py-3 hover:bg-dr/50 transition-colors">
+                      <div key={o.id} className="flex items-center justify-between px-5 py-3 hover:bg-slate-700/50 transition-colors">
                         <div>
-                          <div className="text-sm font-mono text-dhi">{o.orderNumber}</div>
-                          <div className="text-xs text-dlo">{o.type?.replace('_', ' ')}</div>
+                          <div className="text-sm font-mono text-white">{o.orderNumber}</div>
+                          <div className="text-xs text-slate-500">{o.type?.replace('_', ' ')}</div>
                         </div>
                         <div className="text-sm text-emerald-500 font-medium">${o.total.toFixed(2)}</div>
                       </div>
@@ -174,20 +174,20 @@ export default function DashboardPage() {
               </div>
 
               {/* Active Kitchen Tickets */}
-              <div className="rounded-lg border border-drim bg-ds overflow-hidden">
-                <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
-                  <span className="text-sm font-medium text-dhi">Kitchen Tickets</span>
-                  <span className="text-xs text-dlo">{stats.activeKdsTickets.length} active</span>
+              <div className="rounded-lg border border-slate-700 bg-slate-900 overflow-hidden">
+                <div className="border-b border-slate-700 px-5 py-3.5 flex items-center justify-between">
+                  <span className="text-sm font-medium text-white">Kitchen Tickets</span>
+                  <span className="text-xs text-slate-500">{stats.activeKdsTickets.length} active</span>
                 </div>
                 {stats.activeKdsTickets.length === 0 ? (
-                  <div className="px-5 py-10 text-center text-sm text-dlo">No active tickets</div>
+                  <div className="px-5 py-10 text-center text-sm text-slate-500">No active tickets</div>
                 ) : (
-                  <div className="divide-y divide-drim">
+                  <div className="divide-y divide-slate-700">
                     {stats.activeKdsTickets.map((t) => (
-                      <div key={t.id} className="flex items-center justify-between px-5 py-3 hover:bg-dr/50 transition-colors">
+                      <div key={t.id} className="flex items-center justify-between px-5 py-3 hover:bg-slate-700/50 transition-colors">
                         <div>
-                          <div className="text-sm font-mono text-dhi">{t.ticketNumber}</div>
-                          <div className="text-xs text-dlo">
+                          <div className="text-sm font-mono text-white">{t.ticketNumber}</div>
+                          <div className="text-xs text-slate-500">
                             {t.tableLabel || 'No table'} · {t.items} items
                           </div>
                         </div>
@@ -203,17 +203,17 @@ export default function DashboardPage() {
 
             {/* Alert panel */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="border-l-2 border-warning bg-warning/5 rounded-r-lg px-4 py-3 border border-l-warning border-drim">
+              <div className="border-l-2 border-warning bg-warning/5 rounded-r-lg px-4 py-3 border border-l-warning border-slate-700">
                 <div className="text-xs font-medium text-amber-500">Low Inventory Alert</div>
-                <div className="text-xs text-dlo mt-1">3 items below reorder threshold</div>
+                <div className="text-xs text-slate-500 mt-1">3 items below reorder threshold</div>
               </div>
-              <div className="border-l-2 border-info bg-info/5 rounded-r-lg px-4 py-3 border border-l-info border-drim">
+              <div className="border-l-2 border-info bg-info/5 rounded-r-lg px-4 py-3 border border-l-info border-slate-700">
                 <div className="text-xs font-medium text-blue-500">Kitchen Load</div>
-                <div className="text-xs text-dlo mt-1">{stats.activeTickets} active ticket{stats.activeTickets !== 1 ? 's' : ''} in queue</div>
+                <div className="text-xs text-slate-500 mt-1">{stats.activeTickets} active ticket{stats.activeTickets !== 1 ? 's' : ''} in queue</div>
               </div>
-              <div className="border-l-2 border-success bg-emerald-500/5 rounded-r-lg px-4 py-3 border border-l-success border-drim">
+              <div className="border-l-2 border-success bg-emerald-500/5 rounded-r-lg px-4 py-3 border border-l-success border-slate-700">
                 <div className="text-xs font-medium text-emerald-500">Floor Status</div>
-                <div className="text-xs text-dlo mt-1">{stats.tablesOccupied}/{stats.tablesTotal} tables occupied</div>
+                <div className="text-xs text-slate-500 mt-1">{stats.tablesOccupied}/{stats.tablesTotal} tables occupied</div>
               </div>
             </div>
           </>

@@ -41,9 +41,9 @@ const STATUS_CONFIG: Record<
   },
   dirty: {
     label: 'Needs Cleaning',
-    border: 'border-dedge',
-    bg: 'bg-dr/50 hover:bg-dr',
-    text: 'text-dlo',
+    border: 'border-slate-600',
+    bg: 'bg-slate-700/50 hover:bg-slate-700',
+    text: 'text-slate-500',
     dot: 'bg-dlo',
   },
 };
@@ -112,16 +112,16 @@ export default function TablesViewPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-lg font-semibold text-dhi">Floor Plan</h1>
-            <p className="text-xs text-dlo mt-0.5">Click a table to cycle its status</p>
+            <h1 className="text-lg font-semibold text-white">Floor Plan</h1>
+            <p className="text-xs text-slate-500 mt-0.5">Click a table to cycle its status</p>
           </div>
           {/* Legend */}
           <div className="flex items-center gap-4 flex-wrap">
             {statusSummary.map((s) => (
               <div key={s.key} className="flex items-center gap-1.5">
                 <div className={`w-2 h-2 rounded-full ${s.dot}`} />
-                <span className="text-xs text-dmid">{s.label}</span>
-                <span className="text-xs text-dlo">({s.count})</span>
+                <span className="text-xs text-slate-400">{s.label}</span>
+                <span className="text-xs text-slate-500">({s.count})</span>
               </div>
             ))}
           </div>
@@ -133,9 +133,9 @@ export default function TablesViewPage() {
           return (
             <div key={section}>
               <div className="flex items-center gap-3 mb-3">
-                <h2 className="text-xs font-semibold text-dlo uppercase tracking-widest">{section}</h2>
-                <div className="flex-1 h-px bg-drim" />
-                <span className="text-xs text-dlo">{sectionTables.length} tables</span>
+                <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest">{section}</h2>
+                <div className="flex-1 h-px bg-slate-700im" />
+                <span className="text-xs text-slate-500">{sectionTables.length} tables</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
                 {sectionTables.map((table) => {
@@ -146,8 +146,8 @@ export default function TablesViewPage() {
                       onClick={() => cycleStatus(table.id, table.status)}
                       className={`border-2 rounded-xl p-4 text-center transition-all duration-150 hover:scale-105 active:scale-95 ${cfg.border} ${cfg.bg}`}
                     >
-                      <div className="text-2xl font-bold text-dhi">{table.label}</div>
-                      <div className="text-xs text-dlo mt-1">
+                      <div className="text-2xl font-bold text-white">{table.label}</div>
+                      <div className="text-xs text-slate-500 mt-1">
                         <SeatsIcon />
                         {table.seats}
                       </div>

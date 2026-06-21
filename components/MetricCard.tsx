@@ -48,14 +48,14 @@ export default function MetricCard({
   const cfg = accentConfig[accent];
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-drim bg-ds p-5">
+    <div className="relative overflow-hidden rounded-lg border border-slate-700 bg-slate-900 p-5">
       <div className={`absolute inset-0 ${cfg.glow}`} />
       <div className="relative">
-        <div className="text-xs font-medium text-dlo uppercase tracking-wider">{title}</div>
+        <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">{title}</div>
         <div className={`mt-2 text-2xl font-semibold tabular-nums ${cfg.text}`}>{value}</div>
         {(helper || trend) && (
           <div className="mt-2 flex items-center gap-2">
-            {helper && <span className="text-xs text-dlo">{helper}</span>}
+            {helper && <span className="text-xs text-slate-500">{helper}</span>}
             {trend && (
               <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium border ${cfg.badge}`}>
                 {trend}

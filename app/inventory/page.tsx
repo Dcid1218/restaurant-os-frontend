@@ -19,7 +19,7 @@ interface InventoryItem {
 }
 
 const inputCls =
-  'w-full bg-di border border-dedge rounded-lg px-3 py-2 text-sm text-dhi placeholder-dlo focus:outline-none focus:border-indigo-500 transition-colors';
+  'w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors';
 
 export default function InventoryPage() {
   const [items, setItems] = useState<InventoryItem[]>([]);
@@ -118,8 +118,8 @@ export default function InventoryPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-dhi">Inventory</h1>
-            <p className="text-xs text-dlo mt-0.5">Stock levels, categories, and reorder alerts</p>
+            <h1 className="text-lg font-semibold text-white">Inventory</h1>
+            <p className="text-xs text-slate-500 mt-0.5">Stock levels, categories, and reorder alerts</p>
           </div>
           <Button onClick={() => setShowForm(!showForm)} variant={showForm ? 'secondary' : 'primary'}>
             {showForm ? 'Cancel' : (
@@ -139,21 +139,21 @@ export default function InventoryPage() {
 
         {/* Summary cards */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <div className="bg-ds border border-drim rounded-lg p-5">
-            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Items</div>
-            <div className="mt-2 text-2xl font-semibold text-dhi">{items.length}</div>
+          <div className="bg-slate-900 border border-slate-700 rounded-lg p-5">
+            <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Items</div>
+            <div className="mt-2 text-2xl font-semibold text-white">{items.length}</div>
           </div>
-          <div className="bg-ds border border-warning/30 rounded-lg p-5 bg-warning/5">
+          <div className="bg-slate-900 border border-warning/30 rounded-lg p-5 bg-warning/5">
             <div className="text-xs font-medium text-amber-500 uppercase tracking-wider">Low Stock</div>
             <div className="mt-2 text-2xl font-semibold text-amber-500">{lowStock.length}</div>
           </div>
-          <div className="bg-ds border border-danger/30 rounded-lg p-5 bg-danger/5">
+          <div className="bg-slate-900 border border-danger/30 rounded-lg p-5 bg-danger/5">
             <div className="text-xs font-medium text-red-500 uppercase tracking-wider">Out of Stock</div>
             <div className="mt-2 text-2xl font-semibold text-red-500">{outOfStock.length}</div>
           </div>
-          <div className="bg-ds border border-drim rounded-lg p-5">
-            <div className="text-xs font-medium text-dlo uppercase tracking-wider">Total Value</div>
-            <div className="mt-2 text-2xl font-semibold text-dhi">${totalValue.toLocaleString()}</div>
+          <div className="bg-slate-900 border border-slate-700 rounded-lg p-5">
+            <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Value</div>
+            <div className="mt-2 text-2xl font-semibold text-white">${totalValue.toLocaleString()}</div>
           </div>
         </div>
 
@@ -161,9 +161,9 @@ export default function InventoryPage() {
         {showForm && (
           <form
             onSubmit={handleCreate}
-            className="bg-ds border border-drim rounded-lg p-5 space-y-4"
+            className="bg-slate-900 border border-slate-700 rounded-lg p-5 space-y-4"
           >
-            <div className="text-sm font-medium text-dhi">New Inventory Item</div>
+            <div className="text-sm font-medium text-white">New Inventory Item</div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { key: 'name', label: 'Name', placeholder: 'Tomatoes', required: true },
@@ -175,7 +175,7 @@ export default function InventoryPage() {
                 { key: 'supplier', label: 'Supplier', placeholder: 'Sysco' },
               ].map(({ key, label, ...rest }) => (
                 <div key={key}>
-                  <label className="block text-xs text-dmid mb-1.5">{label}</label>
+                  <label className="block text-xs text-slate-400 mb-1.5">{label}</label>
                   <input
                     value={form[key as keyof typeof form]}
                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
@@ -203,7 +203,7 @@ export default function InventoryPage() {
               key={key}
               onClick={() => { setFilter(key); setPage(1); }}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                filter === key ? active : 'bg-dr text-dmid hover:text-dhi border border-dedge'
+                filter === key ? active : 'bg-slate-700 text-slate-400 hover:text-white border border-slate-600'
               }`}
             >
               {label}
@@ -212,20 +212,20 @@ export default function InventoryPage() {
         </div>
 
         {/* Table */}
-        <div className="bg-ds border border-drim rounded-lg overflow-hidden">
-          <div className="border-b border-drim px-5 py-3.5 flex items-center justify-between">
-            <span className="text-sm font-medium text-dhi">Inventory Items</span>
-            <span className="text-xs text-dlo">{filtered.length} items</span>
+        <div className="bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+          <div className="border-b border-slate-700 px-5 py-3.5 flex items-center justify-between">
+            <span className="text-sm font-medium text-white">Inventory Items</span>
+            <span className="text-xs text-slate-500">{filtered.length} items</span>
           </div>
           {loading ? (
-            <div className="p-8 text-center text-dlo text-sm">Loading inventory...</div>
+            <div className="p-8 text-center text-slate-500 text-sm">Loading inventory...</div>
           ) : filtered.length === 0 ? (
             <EmptyState title="No items found" description="Add your first inventory item above." />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-drim text-xs uppercase tracking-wider text-dlo">
+                  <tr className="border-b border-slate-700 text-xs uppercase tracking-wider text-slate-500">
                     <th className="text-left px-5 py-3">Item</th>
                     <th className="text-left px-5 py-3">Category</th>
                     <th className="text-left px-5 py-3">On Hand</th>
@@ -237,9 +237,9 @@ export default function InventoryPage() {
                 </thead>
                 <tbody>
                   {paged.map((item) => (
-                    <tr key={item.id} className="border-b border-drim/50 hover:bg-dr/40 transition-colors">
-                      <td className="px-5 py-3 text-dmid font-medium">{item.name}</td>
-                      <td className="px-5 py-3 text-dlo">{item.category}</td>
+                    <tr key={item.id} className="border-b border-slate-700/50 hover:bg-slate-700/40 transition-colors">
+                      <td className="px-5 py-3 text-slate-400 font-medium">{item.name}</td>
+                      <td className="px-5 py-3 text-slate-500">{item.category}</td>
                       <td className="px-5 py-3">
                         <span
                           className={
@@ -247,16 +247,16 @@ export default function InventoryPage() {
                               ? 'text-red-500'
                               : item.onHand <= item.reorderPoint
                               ? 'text-amber-500'
-                              : 'text-dmid'
+                              : 'text-slate-400'
                           }
                         >
                           {item.onHand} {item.unit}
                         </span>
                       </td>
-                      <td className="px-5 py-3 text-dlo">
+                      <td className="px-5 py-3 text-slate-500">
                         {item.reorderPoint} {item.unit}
                       </td>
-                      <td className="px-5 py-3 text-dlo">${(item.cost || 0).toFixed(2)}</td>
+                      <td className="px-5 py-3 text-slate-500">${(item.cost || 0).toFixed(2)}</td>
                       <td className="px-5 py-3">
                         <Badge variant={stockVariant(item)}>
                           {item.onHand <= 0 ? 'Out' : item.onHand <= item.reorderPoint ? 'Low' : 'OK'}
@@ -265,7 +265,7 @@ export default function InventoryPage() {
                       <td className="px-5 py-3">
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="text-xs text-dlo hover:text-red-500 transition-colors font-medium"
+                          className="text-xs text-slate-500 hover:text-red-500 transition-colors font-medium"
                         >
                           Delete
                         </button>
@@ -276,8 +276,8 @@ export default function InventoryPage() {
               </table>
 
               {totalPages > 1 && (
-                <div className="flex items-center justify-between border-t border-drim px-5 py-3">
-                  <span className="text-xs text-dlo">
+                <div className="flex items-center justify-between border-t border-slate-700 px-5 py-3">
+                  <span className="text-xs text-slate-500">
                     {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of{' '}
                     {filtered.length}
                   </span>
@@ -285,14 +285,14 @@ export default function InventoryPage() {
                     <button
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={safePage <= 1}
-                      className="px-3 py-1.5 rounded-md text-xs bg-dr text-dmid hover:text-dhi border border-dedge disabled:opacity-40 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs bg-slate-700 text-slate-400 hover:text-white border border-slate-600 disabled:opacity-40 transition-colors"
                     >
                       ← Prev
                     </button>
                     <button
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={safePage >= totalPages}
-                      className="px-3 py-1.5 rounded-md text-xs bg-dr text-dmid hover:text-dhi border border-dedge disabled:opacity-40 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs bg-slate-700 text-slate-400 hover:text-white border border-slate-600 disabled:opacity-40 transition-colors"
                     >
                       Next →
                     </button>

@@ -31,7 +31,7 @@ const TICKET_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'succes
   PENDING: { badge: 'warning', border: 'border-warning/40', bg: 'bg-warning/5' },
   IN_PROGRESS: { badge: 'info', border: 'border-info/40', bg: 'bg-info/5' },
   READY: { badge: 'success', border: 'border-success/40', bg: 'bg-emerald-500/5' },
-  COMPLETED: { badge: 'neutral', border: 'border-drim', bg: 'bg-ds/50' },
+  COMPLETED: { badge: 'neutral', border: 'border-slate-700', bg: 'bg-slate-900/50' },
   CANCELLED: { badge: 'danger', border: 'border-danger/40', bg: 'bg-danger/5' },
 };
 
@@ -46,7 +46,7 @@ const ITEM_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success'
 
 function KitchenIcon() {
   return (
-    <svg className="w-6 h-6 text-dlo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="w-6 h-6 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a9 9 0 00-9 9c0 2.4.94 4.58 2.47 6.2L12 22l6.53-4.8A8.96 8.96 0 0021 11a9 9 0 00-9-9z" />
     </svg>
   );
@@ -139,8 +139,8 @@ export default function KDSPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold text-dhi">Kitchen Display</h1>
-            <p className="text-xs text-dlo">
+            <h1 className="text-lg font-semibold text-white">Kitchen Display</h1>
+            <p className="text-xs text-slate-500">
               Auto-refreshing · Last update:{' '}
               {lastRefresh.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
             </p>
@@ -153,7 +153,7 @@ export default function KDSPage() {
                 className={`px-3 py-1.5 rounded-md text-xs font-medium capitalize transition-colors duration-150 ${
                   filter === f
                     ? 'bg-indigo-500 text-white'
-                    : 'bg-dr text-dmid hover:text-dhi border border-dedge'
+                    : 'bg-slate-700 text-slate-400 hover:text-white border border-slate-600'
                 }`}
               >
                 {f.replace('_', ' ')}
@@ -182,13 +182,13 @@ export default function KDSPage() {
                   {/* Ticket header */}
                   <div className="flex items-start justify-between">
                     <div>
-                      <div className="text-xl font-bold text-dhi tracking-tight">{ticket.ticketNumber}</div>
+                      <div className="text-xl font-bold text-white tracking-tight">{ticket.ticketNumber}</div>
                       {ticket.tableLabel && (
-                        <div className="text-xs text-dmid">{ticket.tableLabel}</div>
+                        <div className="text-xs text-slate-400">{ticket.tableLabel}</div>
                       )}
                     </div>
                     <div className="text-right flex flex-col items-end gap-1">
-                      <span className={`text-lg font-mono font-semibold ${isUrgent ? 'text-red-500' : 'text-dmid'}`}>
+                      <span className={`text-lg font-mono font-semibold ${isUrgent ? 'text-red-500' : 'text-slate-400'}`}>
                         {elapsedTime}
                       </span>
                       <Badge variant={cfg.badge}>{ticket.status.replace('_', ' ')}</Badge>
@@ -196,7 +196,7 @@ export default function KDSPage() {
                   </div>
 
                   {ticket.serverName && (
-                    <div className="text-xs text-dlo">Server: {ticket.serverName}</div>
+                    <div className="text-xs text-slate-500">Server: {ticket.serverName}</div>
                   )}
 
                   {/* Items */}
@@ -209,11 +209,11 @@ export default function KDSPage() {
                           className="flex items-center justify-between bg-black/20 rounded-lg px-3 py-2"
                         >
                           <div className="flex items-center gap-2 min-w-0">
-                            <span className="text-base font-bold text-dhi shrink-0">{item.quantity}×</span>
+                            <span className="text-base font-bold text-white shrink-0">{item.quantity}×</span>
                             <div className="min-w-0">
-                              <div className="text-sm font-medium text-dhi truncate">{item.menuItem.name}</div>
+                              <div className="text-sm font-medium text-white truncate">{item.menuItem.name}</div>
                               {item.notes && (
-                                <div className="text-xs text-dlo">{item.notes}</div>
+                                <div className="text-xs text-slate-500">{item.notes}</div>
                               )}
                             </div>
                           </div>
@@ -257,7 +257,7 @@ export default function KDSPage() {
                     {ticket.status === 'READY' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'COMPLETED')}
-                        className="flex-1 py-2 rounded-lg bg-dr hover:bg-edge text-dmid hover:text-dhi text-sm font-semibold border border-dedge transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-slate-700 hover:bg-edge text-slate-400 hover:text-white text-sm font-semibold border border-slate-600 transition-colors"
                       >
                         Complete
                       </button>
