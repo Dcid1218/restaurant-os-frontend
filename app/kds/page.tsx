@@ -30,8 +30,8 @@ const API = 'http://localhost:4000/api/v1';
 const TICKET_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success' | 'neutral' | 'danger'; border: string; bg: string }> = {
   PENDING: { badge: 'warning', border: 'border-warning/40', bg: 'bg-warning/5' },
   IN_PROGRESS: { badge: 'info', border: 'border-info/40', bg: 'bg-info/5' },
-  READY: { badge: 'success', border: 'border-success/40', bg: 'bg-success/5' },
-  COMPLETED: { badge: 'neutral', border: 'border-rim', bg: 'bg-surface/50' },
+  READY: { badge: 'success', border: 'border-success/40', bg: 'bg-emerald-500/5' },
+  COMPLETED: { badge: 'neutral', border: 'border-[#2a2a3a]', bg: 'bg-[#12121a]/50' },
   CANCELLED: { badge: 'danger', border: 'border-danger/40', bg: 'bg-danger/5' },
 };
 
@@ -46,7 +46,7 @@ const ITEM_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success'
 
 function KitchenIcon() {
   return (
-    <svg className="w-6 h-6 text-lo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="w-6 h-6 text-[#6a6a80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 2a9 9 0 00-9 9c0 2.4.94 4.58 2.47 6.2L12 22l6.53-4.8A8.96 8.96 0 0021 11a9 9 0 00-9-9z" />
     </svg>
   );
@@ -139,8 +139,8 @@ export default function KDSPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold text-hi">Kitchen Display</h1>
-            <p className="text-xs text-lo">
+            <h1 className="text-lg font-semibold text-[#f0f0f5]">Kitchen Display</h1>
+            <p className="text-xs text-[#6a6a80]">
               Auto-refreshing · Last update:{' '}
               {lastRefresh.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
             </p>
@@ -152,8 +152,8 @@ export default function KDSPage() {
                 onClick={() => setFilter(f)}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium capitalize transition-colors duration-150 ${
                   filter === f
-                    ? 'bg-accent text-white'
-                    : 'bg-raised text-mid hover:text-hi border border-edge'
+                    ? 'bg-indigo-500 text-white'
+                    : 'bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f]'
                 }`}
               >
                 {f.replace('_', ' ')}
@@ -182,13 +182,13 @@ export default function KDSPage() {
                   {/* Ticket header */}
                   <div className="flex items-start justify-between">
                     <div>
-                      <div className="text-xl font-bold text-hi tracking-tight">{ticket.ticketNumber}</div>
+                      <div className="text-xl font-bold text-[#f0f0f5] tracking-tight">{ticket.ticketNumber}</div>
                       {ticket.tableLabel && (
-                        <div className="text-xs text-mid">{ticket.tableLabel}</div>
+                        <div className="text-xs text-[#a0a0b8]">{ticket.tableLabel}</div>
                       )}
                     </div>
                     <div className="text-right flex flex-col items-end gap-1">
-                      <span className={`text-lg font-mono font-semibold ${isUrgent ? 'text-danger' : 'text-mid'}`}>
+                      <span className={`text-lg font-mono font-semibold ${isUrgent ? 'text-red-500' : 'text-[#a0a0b8]'}`}>
                         {elapsedTime}
                       </span>
                       <Badge variant={cfg.badge}>{ticket.status.replace('_', ' ')}</Badge>
@@ -196,7 +196,7 @@ export default function KDSPage() {
                   </div>
 
                   {ticket.serverName && (
-                    <div className="text-xs text-lo">Server: {ticket.serverName}</div>
+                    <div className="text-xs text-[#6a6a80]">Server: {ticket.serverName}</div>
                   )}
 
                   {/* Items */}
@@ -209,11 +209,11 @@ export default function KDSPage() {
                           className="flex items-center justify-between bg-black/20 rounded-lg px-3 py-2"
                         >
                           <div className="flex items-center gap-2 min-w-0">
-                            <span className="text-base font-bold text-hi shrink-0">{item.quantity}×</span>
+                            <span className="text-base font-bold text-[#f0f0f5] shrink-0">{item.quantity}×</span>
                             <div className="min-w-0">
-                              <div className="text-sm font-medium text-hi truncate">{item.menuItem.name}</div>
+                              <div className="text-sm font-medium text-[#f0f0f5] truncate">{item.menuItem.name}</div>
                               {item.notes && (
-                                <div className="text-xs text-lo">{item.notes}</div>
+                                <div className="text-xs text-[#6a6a80]">{item.notes}</div>
                               )}
                             </div>
                           </div>
@@ -241,7 +241,7 @@ export default function KDSPage() {
                     {ticket.status === 'PENDING' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'IN_PROGRESS')}
-                        className="flex-1 py-2 rounded-lg bg-info/10 hover:bg-info text-info hover:text-white text-sm font-semibold border border-info/30 transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-blue-500/10 hover:bg-info text-blue-500 hover:text-white text-sm font-semibold border border-info/30 transition-colors"
                       >
                         Start
                       </button>
@@ -249,7 +249,7 @@ export default function KDSPage() {
                     {ticket.status === 'IN_PROGRESS' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'READY')}
-                        className="flex-1 py-2 rounded-lg bg-success/10 hover:bg-success text-success hover:text-white text-sm font-semibold border border-success/30 transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white text-sm font-semibold border border-success/30 transition-colors"
                       >
                         Ready
                       </button>
@@ -257,14 +257,14 @@ export default function KDSPage() {
                     {ticket.status === 'READY' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'COMPLETED')}
-                        className="flex-1 py-2 rounded-lg bg-raised hover:bg-edge text-mid hover:text-hi text-sm font-semibold border border-edge transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-[#22222f] hover:bg-edge text-[#a0a0b8] hover:text-[#f0f0f5] text-sm font-semibold border border-[#3a3a4f] transition-colors"
                       >
                         Complete
                       </button>
                     )}
                     <button
                       onClick={() => updateTicketStatus(ticket.id, 'CANCELLED')}
-                      className="px-3 py-2 rounded-lg bg-danger/5 hover:bg-danger text-danger hover:text-white text-sm border border-danger/20 transition-colors"
+                      className="px-3 py-2 rounded-lg bg-danger/5 hover:bg-danger text-red-500 hover:text-white text-sm border border-danger/20 transition-colors"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

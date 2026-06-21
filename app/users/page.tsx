@@ -36,7 +36,7 @@ const roleVariant: Record<string, 'warning' | 'info' | 'neutral'> = {
 };
 
 const inputCls =
-  'w-full bg-inset border border-edge rounded-lg px-3 py-2 text-sm text-hi placeholder-lo focus:outline-none focus:border-accent transition-colors';
+  'w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors';
 
 export default function UsersPage() {
   const [users, setUsers] = useState<OrgUser[]>([]);
@@ -100,8 +100,8 @@ export default function UsersPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-hi">Team & Organization</h1>
-            <p className="text-xs text-lo mt-0.5">Manage users, roles, and organization settings</p>
+            <h1 className="text-lg font-semibold text-[#f0f0f5]">Team & Organization</h1>
+            <p className="text-xs text-[#6a6a80] mt-0.5">Manage users, roles, and organization settings</p>
           </div>
           {tab === 'users' && (
             <Button onClick={() => setShowForm(!showForm)} variant={showForm ? 'secondary' : 'primary'}>
@@ -118,11 +118,11 @@ export default function UsersPage() {
         </div>
 
         {error && (
-          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-danger">{error}</div>
+          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
         )}
 
         {/* Tabs */}
-        <div className="flex gap-1 border-b border-rim">
+        <div className="flex gap-1 border-b border-[#2a2a3a]">
           {[
             { key: 'users', label: `Team Members (${users.length})` },
             { key: 'org', label: 'Organization Settings' },
@@ -132,8 +132,8 @@ export default function UsersPage() {
               onClick={() => setTab(key as 'users' | 'org')}
               className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
                 tab === key
-                  ? 'text-accent border-accent'
-                  : 'text-lo border-transparent hover:text-mid'
+                  ? 'text-indigo-500 border-accent'
+                  : 'text-[#6a6a80] border-transparent hover:text-[#a0a0b8]'
               }`}
             >
               {label}
@@ -142,28 +142,28 @@ export default function UsersPage() {
         </div>
 
         {loading ? (
-          <div className="h-48 rounded-lg bg-surface border border-rim animate-pulse" />
+          <div className="h-48 rounded-lg bg-[#12121a] border border-[#2a2a3a] animate-pulse" />
         ) : tab === 'users' ? (
           <>
             {/* Invite form */}
             {showForm && (
-              <form onSubmit={handleCreate} className="bg-surface border border-rim rounded-lg p-5 space-y-4">
-                <div className="text-sm font-medium text-hi">Invite New Team Member</div>
+              <form onSubmit={handleCreate} className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-5 space-y-4">
+                <div className="text-sm font-medium text-[#f0f0f5]">Invite New Team Member</div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <div>
-                    <label className="block text-xs text-mid mb-1.5">First Name</label>
+                    <label className="block text-xs text-[#a0a0b8] mb-1.5">First Name</label>
                     <input value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} required className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs text-mid mb-1.5">Last Name</label>
+                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Last Name</label>
                     <input value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} required className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs text-mid mb-1.5">Email</label>
+                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Email</label>
                     <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs text-mid mb-1.5">Role</label>
+                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Role</label>
                     <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className={inputCls}>
                       <option value="STAFF">Staff</option>
                       <option value="MANAGER">Manager</option>
@@ -171,7 +171,7 @@ export default function UsersPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-mid mb-1.5">Temporary Password</label>
+                    <label className="block text-xs text-[#a0a0b8] mb-1.5">Temporary Password</label>
                     <input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required className={inputCls} />
                   </div>
                 </div>
@@ -182,9 +182,9 @@ export default function UsersPage() {
             )}
 
             {/* Users table */}
-            <div className="bg-surface border border-rim rounded-lg overflow-hidden">
-              <div className="border-b border-rim px-5 py-3.5">
-                <span className="text-sm font-medium text-hi">Team Members</span>
+            <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg overflow-hidden">
+              <div className="border-b border-[#2a2a3a] px-5 py-3.5">
+                <span className="text-sm font-medium text-[#f0f0f5]">Team Members</span>
               </div>
               {users.length === 0 ? (
                 <EmptyState
@@ -195,7 +195,7 @@ export default function UsersPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-rim text-xs uppercase tracking-wider text-lo">
+                      <tr className="border-b border-[#2a2a3a] text-xs uppercase tracking-wider text-[#6a6a80]">
                         <th className="text-left px-5 py-3">Name</th>
                         <th className="text-left px-5 py-3">Email</th>
                         <th className="text-left px-5 py-3">Role</th>
@@ -206,14 +206,14 @@ export default function UsersPage() {
                     </thead>
                     <tbody>
                       {users.map((u) => (
-                        <tr key={u.id} className="border-b border-rim/50 hover:bg-raised/40 transition-colors">
+                        <tr key={u.id} className="border-b border-[#2a2a3a]/50 hover:bg-[#22222f]/40 transition-colors">
                           <td className="px-5 py-3">
                             <div className="flex items-center gap-3">
                               <Avatar name={`${u.firstName} ${u.lastName}`} size="sm" />
-                              <span className="text-mid font-medium">{u.firstName} {u.lastName}</span>
+                              <span className="text-[#a0a0b8] font-medium">{u.firstName} {u.lastName}</span>
                             </div>
                           </td>
-                          <td className="px-5 py-3 text-lo">{u.email}</td>
+                          <td className="px-5 py-3 text-[#6a6a80]">{u.email}</td>
                           <td className="px-5 py-3">
                             <Badge variant={roleVariant[u.role] ?? 'neutral'}>{u.role}</Badge>
                           </td>
@@ -222,14 +222,14 @@ export default function UsersPage() {
                               {u.isActive !== false ? 'Active' : 'Inactive'}
                             </Badge>
                           </td>
-                          <td className="px-5 py-3 text-lo text-xs">
+                          <td className="px-5 py-3 text-[#6a6a80] text-xs">
                             {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString() : 'Never'}
                           </td>
                           <td className="px-5 py-3">
                             {u.isActive !== false && (
                               <button
                                 onClick={() => handleDeactivate(u.id)}
-                                className="text-xs text-lo hover:text-danger transition-colors font-medium"
+                                className="text-xs text-[#6a6a80] hover:text-red-500 transition-colors font-medium"
                               >
                                 Deactivate
                               </button>
@@ -245,7 +245,7 @@ export default function UsersPage() {
           </>
         ) : (
           /* Org Settings */
-          <div className="bg-surface border border-rim rounded-lg p-6 space-y-6">
+          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-6 space-y-6">
             {org ? (
               <>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -258,19 +258,19 @@ export default function UsersPage() {
                     { label: 'Organization ID', value: org.id, mono: true },
                   ].map(({ label, value, mono }) => (
                     <div key={label}>
-                      <div className="text-xs font-medium text-lo mb-1.5">{label}</div>
-                      <div className={`text-sm text-mid ${mono ? 'font-mono text-xs' : ''}`}>{value}</div>
+                      <div className="text-xs font-medium text-[#6a6a80] mb-1.5">{label}</div>
+                      <div className={`text-sm text-[#a0a0b8] ${mono ? 'font-mono text-xs' : ''}`}>{value}</div>
                     </div>
                   ))}
                 </div>
-                <div className="pt-5 border-t border-rim">
-                  <p className="text-xs text-lo">
+                <div className="pt-5 border-t border-[#2a2a3a]">
+                  <p className="text-xs text-[#6a6a80]">
                     To update organization settings, contact support or use the API directly.
                   </p>
                 </div>
               </>
             ) : (
-              <div className="text-sm text-lo">Organization details not available.</div>
+              <div className="text-sm text-[#6a6a80]">Organization details not available.</div>
             )}
           </div>
         )}

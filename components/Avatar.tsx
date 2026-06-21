@@ -22,7 +22,7 @@ export default function Avatar({ name, size = 'md', className = '' }: AvatarProp
 
   return (
     <div
-      className={`${sizeClasses[size]} rounded-full bg-accent/20 text-accent font-semibold flex items-center justify-center shrink-0 ${className}`}
+      className={`${sizeClasses[size]} rounded-full bg-indigo-500/20 text-indigo-500 font-semibold flex items-center justify-center shrink-0 ${className}`}
     >
       {initials}
     </div>

@@ -21,22 +21,6 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-
-  --color-base: var(--bg-primary);
-  --color-surface: var(--bg-secondary);
-  --color-inset: var(--bg-tertiary);
-  --color-raised: var(--bg-elevated);
-  --color-rim: var(--border-subtle);
-  --color-edge: var(--border-default);
-  --color-hi: var(--text-primary);
-  --color-mid: var(--text-secondary);
-  --color-lo: var(--text-tertiary);
-  --color-accent: var(--accent-primary);
-  --color-accent-light: var(--accent-primary-hover);
-  --color-success: var(--accent-success);
-  --color-warning: var(--accent-warning);
-  --color-danger: var(--accent-danger);
-  --color-info: var(--accent-info);
 }
 
 body {

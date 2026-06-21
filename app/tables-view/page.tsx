@@ -21,29 +21,29 @@ const STATUS_CONFIG: Record<
   available: {
     label: 'Available',
     border: 'border-success/40',
-    bg: 'bg-success/5 hover:bg-success/10',
-    text: 'text-success',
-    dot: 'bg-success',
+    bg: 'bg-emerald-500/5 hover:bg-emerald-500/10',
+    text: 'text-emerald-500',
+    dot: 'bg-emerald-500',
   },
   occupied: {
     label: 'Occupied',
     border: 'border-danger/40',
-    bg: 'bg-danger/5 hover:bg-danger/10',
-    text: 'text-danger',
+    bg: 'bg-danger/5 hover:bg-red-500/10',
+    text: 'text-red-500',
     dot: 'bg-danger',
   },
   reserved: {
     label: 'Reserved',
     border: 'border-warning/40',
-    bg: 'bg-warning/5 hover:bg-warning/10',
-    text: 'text-warning',
+    bg: 'bg-warning/5 hover:bg-amber-500/10',
+    text: 'text-amber-500',
     dot: 'bg-warning',
   },
   dirty: {
     label: 'Needs Cleaning',
-    border: 'border-edge',
-    bg: 'bg-raised/50 hover:bg-raised',
-    text: 'text-lo',
+    border: 'border-[#3a3a4f]',
+    bg: 'bg-[#22222f]/50 hover:bg-[#22222f]',
+    text: 'text-[#6a6a80]',
     dot: 'bg-lo',
   },
 };
@@ -112,16 +112,16 @@ export default function TablesViewPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-lg font-semibold text-hi">Floor Plan</h1>
-            <p className="text-xs text-lo mt-0.5">Click a table to cycle its status</p>
+            <h1 className="text-lg font-semibold text-[#f0f0f5]">Floor Plan</h1>
+            <p className="text-xs text-[#6a6a80] mt-0.5">Click a table to cycle its status</p>
           </div>
           {/* Legend */}
           <div className="flex items-center gap-4 flex-wrap">
             {statusSummary.map((s) => (
               <div key={s.key} className="flex items-center gap-1.5">
                 <div className={`w-2 h-2 rounded-full ${s.dot}`} />
-                <span className="text-xs text-mid">{s.label}</span>
-                <span className="text-xs text-lo">({s.count})</span>
+                <span className="text-xs text-[#a0a0b8]">{s.label}</span>
+                <span className="text-xs text-[#6a6a80]">({s.count})</span>
               </div>
             ))}
           </div>
@@ -133,9 +133,9 @@ export default function TablesViewPage() {
           return (
             <div key={section}>
               <div className="flex items-center gap-3 mb-3">
-                <h2 className="text-xs font-semibold text-lo uppercase tracking-widest">{section}</h2>
+                <h2 className="text-xs font-semibold text-[#6a6a80] uppercase tracking-widest">{section}</h2>
                 <div className="flex-1 h-px bg-rim" />
-                <span className="text-xs text-lo">{sectionTables.length} tables</span>
+                <span className="text-xs text-[#6a6a80]">{sectionTables.length} tables</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
                 {sectionTables.map((table) => {
@@ -146,8 +146,8 @@ export default function TablesViewPage() {
                       onClick={() => cycleStatus(table.id, table.status)}
                       className={`border-2 rounded-xl p-4 text-center transition-all duration-150 hover:scale-105 active:scale-95 ${cfg.border} ${cfg.bg}`}
                     >
-                      <div className="text-2xl font-bold text-hi">{table.label}</div>
-                      <div className="text-xs text-lo mt-1">
+                      <div className="text-2xl font-bold text-[#f0f0f5]">{table.label}</div>
+                      <div className="text-xs text-[#6a6a80] mt-1">
                         <SeatsIcon />
                         {table.seats}
                       </div>
@@ -155,7 +155,7 @@ export default function TablesViewPage() {
                       {table.orders.length > 0 && (
                         <div className="mt-1.5 flex items-center justify-center gap-1">
                           <div className="w-1.5 h-1.5 rounded-full bg-danger animate-pulse" />
-                          <span className="text-xs text-danger">Active</span>
+                          <span className="text-xs text-red-500">Active</span>
                         </div>
                       )}
                     </button>

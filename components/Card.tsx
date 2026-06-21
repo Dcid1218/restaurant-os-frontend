@@ -16,7 +16,7 @@ type CardProps = {
 
 export default function Card({ children, className = '', padding = 'md' }: CardProps) {
   return (
-    <div className={`bg-surface border border-rim rounded-lg ${paddingClasses[padding]} ${className}`}>
+    <div className={`bg-[#12121a] border border-[#2a2a3a] rounded-lg ${paddingClasses[padding]} ${className}`}>
       {children}
     </div>
   );

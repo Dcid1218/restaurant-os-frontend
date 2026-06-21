@@ -19,7 +19,7 @@ interface CartItem extends MenuItem {
 
 const TAX_RATE = parseFloat(process.env.NEXT_PUBLIC_TAX_RATE ?? '0.0825');
 
-const categoryColors = ['bg-accent/10 text-accent', 'bg-success/10 text-success', 'bg-warning/10 text-warning', 'bg-info/10 text-info', 'bg-danger/10 text-danger'];
+const categoryColors = ['bg-indigo-500/10 text-indigo-500', 'bg-emerald-500/10 text-emerald-500', 'bg-amber-500/10 text-amber-500', 'bg-blue-500/10 text-blue-500', 'bg-red-500/10 text-red-500'];
 
 export default function POSPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -116,7 +116,7 @@ export default function POSPage() {
         <div className="flex-1 flex flex-col min-h-0">
           {/* Header row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
-            <h1 className="text-lg font-semibold text-hi">Point of Sale</h1>
+            <h1 className="text-lg font-semibold text-[#f0f0f5]">Point of Sale</h1>
             <div className="flex gap-1.5">
               {['DINE_IN', 'TAKEOUT', 'DELIVERY'].map((t) => (
                 <button
@@ -124,8 +124,8 @@ export default function POSPage() {
                   onClick={() => setOrderType(t)}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors duration-150 ${
                     orderType === t
-                      ? 'bg-accent text-white'
-                      : 'bg-raised text-mid hover:text-hi border border-edge'
+                      ? 'bg-indigo-500 text-white'
+                      : 'bg-[#22222f] text-[#a0a0b8] hover:text-[#f0f0f5] border border-[#3a3a4f]'
                   }`}
                 >
                   {t.replace('_', ' ')}
@@ -142,8 +142,8 @@ export default function POSPage() {
                 onClick={() => setActiveCategory(c)}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium capitalize transition-colors duration-150 ${
                   activeCategory === c
-                    ? 'bg-surface text-hi border border-edge'
-                    : 'text-lo hover:text-mid'
+                    ? 'bg-[#12121a] text-[#f0f0f5] border border-[#3a3a4f]'
+                    : 'text-[#6a6a80] hover:text-[#a0a0b8]'
                 }`}
               >
                 {c}
@@ -155,7 +155,7 @@ export default function POSPage() {
           {loading ? (
             <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-3">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="h-24 rounded-lg bg-surface border border-rim animate-pulse" />
+                <div key={i} className="h-24 rounded-lg bg-[#12121a] border border-[#2a2a3a] animate-pulse" />
               ))}
             </div>
           ) : (
@@ -164,17 +164,17 @@ export default function POSPage() {
                 <button
                   key={item.id}
                   onClick={() => addToCart(item)}
-                  className="bg-surface border border-rim rounded-lg p-4 text-left hover:border-edge hover:bg-raised transition-all duration-150 group"
+                  className="bg-[#12121a] border border-[#2a2a3a] rounded-lg p-4 text-left hover:border-[#3a3a4f] hover:bg-[#22222f] transition-all duration-150 group"
                 >
                   {/* Color placeholder for image */}
                   <div className={`w-full h-2 rounded-full mb-3 ${categoryColors[idx % categoryColors.length].split(' ')[0]}`} />
-                  <div className="text-xs text-lo mb-1">{item.category.name}</div>
-                  <div className="text-sm font-medium text-hi group-hover:text-accent transition-colors">
+                  <div className="text-xs text-[#6a6a80] mb-1">{item.category.name}</div>
+                  <div className="text-sm font-medium text-[#f0f0f5] group-hover:text-indigo-500 transition-colors">
                     {item.name}
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-sm font-semibold text-success">${item.price.toFixed(2)}</span>
-                    <span className="text-xs text-lo bg-raised rounded px-1.5 py-0.5 group-hover:bg-accent/10 group-hover:text-accent transition-colors">
+                    <span className="text-sm font-semibold text-emerald-500">${item.price.toFixed(2)}</span>
+                    <span className="text-xs text-[#6a6a80] bg-[#22222f] rounded px-1.5 py-0.5 group-hover:bg-indigo-500/10 group-hover:text-indigo-500 transition-colors">
                       + Add
                     </span>
                   </div>
@@ -185,15 +185,15 @@ export default function POSPage() {
         </div>
 
         {/* Cart panel */}
-        <div className="w-full lg:w-80 bg-surface border border-rim rounded-lg flex flex-col max-h-[50vh] lg:max-h-none">
+        <div className="w-full lg:w-80 bg-[#12121a] border border-[#2a2a3a] rounded-lg flex flex-col max-h-[50vh] lg:max-h-none">
           {/* Cart header */}
-          <div className="p-4 border-b border-rim">
+          <div className="p-4 border-b border-[#2a2a3a]">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold text-hi">Current Order</h2>
+              <h2 className="text-sm font-semibold text-[#f0f0f5]">Current Order</h2>
               <input
                 value={tableLabel}
                 onChange={(e) => setTableLabel(e.target.value)}
-                className="bg-inset border border-edge rounded-md px-2 py-1 text-xs text-hi w-24 text-center focus:outline-none focus:border-accent"
+                className="bg-[#1a1a26] border border-[#3a3a4f] rounded-md px-2 py-1 text-xs text-[#f0f0f5] w-24 text-center focus:outline-none focus:border-indigo-500"
               />
             </div>
           </div>
@@ -202,31 +202,31 @@ export default function POSPage() {
           <div className="flex-1 overflow-y-auto p-3 space-y-2">
             {cart.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-8">
-                <div className="w-10 h-10 rounded-full bg-raised border border-rim flex items-center justify-center mb-3">
-                  <svg className="w-5 h-5 text-lo" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <div className="w-10 h-10 rounded-full bg-[#22222f] border border-[#2a2a3a] flex items-center justify-center mb-3">
+                  <svg className="w-5 h-5 text-[#6a6a80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                   </svg>
                 </div>
-                <p className="text-xs text-lo">Add items to get started</p>
+                <p className="text-xs text-[#6a6a80]">Add items to get started</p>
               </div>
             ) : (
               cart.map((item) => (
-                <div key={item.id} className="flex items-center gap-3 bg-raised rounded-lg px-3 py-2.5">
+                <div key={item.id} className="flex items-center gap-3 bg-[#22222f] rounded-lg px-3 py-2.5">
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-medium text-hi truncate">{item.name}</div>
-                    <div className="text-xs text-success">${(item.price * item.quantity).toFixed(2)}</div>
+                    <div className="text-xs font-medium text-[#f0f0f5] truncate">{item.name}</div>
+                    <div className="text-xs text-emerald-500">${(item.price * item.quantity).toFixed(2)}</div>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="w-6 h-6 rounded bg-surface hover:bg-danger/10 hover:text-danger text-mid text-sm flex items-center justify-center transition-colors"
+                      className="w-6 h-6 rounded bg-[#12121a] hover:bg-red-500/10 hover:text-red-500 text-[#a0a0b8] text-sm flex items-center justify-center transition-colors"
                     >
                       −
                     </button>
-                    <span className="w-5 text-center text-xs font-semibold text-hi">{item.quantity}</span>
+                    <span className="w-5 text-center text-xs font-semibold text-[#f0f0f5]">{item.quantity}</span>
                     <button
                       onClick={() => addToCart(item)}
-                      className="w-6 h-6 rounded bg-surface hover:bg-success/10 hover:text-success text-mid text-sm flex items-center justify-center transition-colors"
+                      className="w-6 h-6 rounded bg-[#12121a] hover:bg-emerald-500/10 hover:text-emerald-500 text-[#a0a0b8] text-sm flex items-center justify-center transition-colors"
                     >
                       +
                     </button>
@@ -237,25 +237,25 @@ export default function POSPage() {
           </div>
 
           {/* Totals + Pay */}
-          <div className="p-4 border-t border-rim space-y-3">
+          <div className="p-4 border-t border-[#2a2a3a] space-y-3">
             <div className="space-y-1.5">
-              <div className="flex justify-between text-xs text-lo">
+              <div className="flex justify-between text-xs text-[#6a6a80]">
                 <span>Subtotal</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-xs text-lo">
+              <div className="flex justify-between text-xs text-[#6a6a80]">
                 <span>Tax ({(TAX_RATE * 100).toFixed(2)}%)</span>
                 <span>${tax.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-sm font-semibold text-hi pt-1.5 border-t border-rim">
+              <div className="flex justify-between text-sm font-semibold text-[#f0f0f5] pt-1.5 border-t border-[#2a2a3a]">
                 <span>Total</span>
-                <span className="text-success">${total.toFixed(2)}</span>
+                <span className="text-emerald-500">${total.toFixed(2)}</span>
               </div>
             </div>
             <button
               onClick={submitOrder}
               disabled={cart.length === 0}
-              className="w-full py-2.5 rounded-md text-sm font-semibold bg-accent hover:bg-accent-light disabled:opacity-40 disabled:cursor-not-allowed text-white transition-colors duration-150"
+              className="w-full py-2.5 rounded-md text-sm font-semibold bg-indigo-500 hover:bg-indigo-500-light disabled:opacity-40 disabled:cursor-not-allowed text-white transition-colors duration-150"
             >
               Send to Kitchen
             </button>

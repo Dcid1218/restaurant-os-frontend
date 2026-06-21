@@ -31,38 +31,38 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-base flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center p-4">
       {/* Background gradient */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 mb-4">
-            <svg className="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-500/10 border border-accent/20 mb-4">
+            <svg className="w-7 h-7 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-1.2 5.4-5 9-9 9 4 0 7.8 3.6 9 9 1.2-5.4 5-9 9-9-4 0-7.8-3.6-9-9z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-semibold text-hi">RestaurantOS</h1>
-          <p className="text-sm text-lo mt-1">Sign in to your workspace</p>
+          <h1 className="text-2xl font-semibold text-[#f0f0f5]">RestaurantOS</h1>
+          <p className="text-sm text-[#6a6a80] mt-1">Sign in to your workspace</p>
         </div>
 
         {/* Card */}
-        <div className="bg-surface border border-rim rounded-xl p-6 shadow-2xl">
+        <div className="bg-[#12121a] border border-[#2a2a3a] rounded-xl p-6 shadow-2xl">
           {error && (
             <div className="mb-4 flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg px-4 py-3">
-              <svg className="w-4 h-4 text-danger mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-red-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
               </svg>
-              <span className="text-sm text-danger">{error}</span>
+              <span className="text-sm text-red-500">{error}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-mid mb-1.5" htmlFor="email">
+              <label className="block text-xs font-medium text-[#a0a0b8] mb-1.5" htmlFor="email">
                 Email
               </label>
               <input
@@ -72,12 +72,12 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@restaurant.com"
                 required
-                className="w-full bg-inset border border-edge rounded-md px-3 py-2.5 text-sm text-hi placeholder-lo focus:outline-none focus:border-accent transition-colors duration-150"
+                className="w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-md px-3 py-2.5 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors duration-150"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-mid mb-1.5" htmlFor="password">
+              <label className="block text-xs font-medium text-[#a0a0b8] mb-1.5" htmlFor="password">
                 Password
               </label>
               <input
@@ -87,14 +87,14 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full bg-inset border border-edge rounded-md px-3 py-2.5 text-sm text-hi placeholder-lo focus:outline-none focus:border-accent transition-colors duration-150"
+                className="w-full bg-[#1a1a26] border border-[#3a3a4f] rounded-md px-3 py-2.5 text-sm text-[#f0f0f5] placeholder-lo focus:outline-none focus:border-indigo-500 transition-colors duration-150"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 bg-accent hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed rounded-md text-sm font-semibold text-white transition-colors duration-150 mt-2"
+              className="w-full py-2.5 bg-indigo-500 hover:bg-indigo-500-light disabled:opacity-50 disabled:cursor-not-allowed rounded-md text-sm font-semibold text-white transition-colors duration-150 mt-2"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -111,7 +111,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-xs text-lo mt-6">RestaurantOS v1.0</p>
+        <p className="text-center text-xs text-[#6a6a80] mt-6">RestaurantOS v1.0</p>
       </div>
     </div>
   );

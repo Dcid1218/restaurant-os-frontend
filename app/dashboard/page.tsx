@@ -103,11 +103,11 @@ export default function DashboardPage() {
   ];
 
   const accentTextMap: Record<string, string> = {
-    indigo: 'text-accent',
-    green: 'text-success',
-    amber: 'text-warning',
-    blue: 'text-info',
-    red: 'text-danger',
+    indigo: 'text-indigo-500',
+    green: 'text-emerald-500',
+    amber: 'text-amber-500',
+    blue: 'text-blue-500',
+    red: 'text-red-500',
   };
 
   return (
@@ -116,12 +116,12 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-hi">Command Center</h1>
-            <p className="mt-0.5 text-sm text-lo">Live overview · Main St. location</p>
+            <h1 className="text-xl font-semibold text-[#f0f0f5]">Command Center</h1>
+            <p className="mt-0.5 text-sm text-[#6a6a80]">Live overview · Main St. location</p>
           </div>
           <button
             onClick={load}
-            className="flex items-center gap-1.5 text-xs text-lo hover:text-hi transition-colors px-3 py-1.5 rounded-md hover:bg-raised border border-transparent hover:border-rim"
+            className="flex items-center gap-1.5 text-xs text-[#6a6a80] hover:text-[#f0f0f5] transition-colors px-3 py-1.5 rounded-md hover:bg-[#22222f] border border-transparent hover:border-[#2a2a3a]"
           >
             <RefreshIcon />
             Refresh
@@ -131,7 +131,7 @@ export default function DashboardPage() {
         {loading ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-24 rounded-lg bg-surface border border-rim animate-pulse" />
+              <div key={i} className="h-24 rounded-lg bg-[#12121a] border border-[#2a2a3a] animate-pulse" />
             ))}
           </div>
         ) : (
@@ -139,8 +139,8 @@ export default function DashboardPage() {
             {/* Metric cards */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {metrics.map((m) => (
-                <div key={m.label} className="relative overflow-hidden rounded-lg border border-rim bg-surface p-5">
-                  <div className="text-xs font-medium text-lo uppercase tracking-wider">{m.label}</div>
+                <div key={m.label} className="relative overflow-hidden rounded-lg border border-[#2a2a3a] bg-[#12121a] p-5">
+                  <div className="text-xs font-medium text-[#6a6a80] uppercase tracking-wider">{m.label}</div>
                   <div className={`mt-2 text-2xl font-semibold tabular-nums ${accentTextMap[m.accent]}`}>
                     {m.value}
                   </div>
@@ -151,22 +151,22 @@ export default function DashboardPage() {
             {/* Bottom grid */}
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {/* Recent Orders */}
-              <div className="rounded-lg border border-rim bg-surface overflow-hidden">
-                <div className="border-b border-rim px-5 py-3.5 flex items-center justify-between">
-                  <span className="text-sm font-medium text-hi">Recent Orders</span>
-                  <span className="text-xs text-lo">{stats.recentOrders.length} orders</span>
+              <div className="rounded-lg border border-[#2a2a3a] bg-[#12121a] overflow-hidden">
+                <div className="border-b border-[#2a2a3a] px-5 py-3.5 flex items-center justify-between">
+                  <span className="text-sm font-medium text-[#f0f0f5]">Recent Orders</span>
+                  <span className="text-xs text-[#6a6a80]">{stats.recentOrders.length} orders</span>
                 </div>
                 {stats.recentOrders.length === 0 ? (
-                  <div className="px-5 py-10 text-center text-sm text-lo">No orders yet</div>
+                  <div className="px-5 py-10 text-center text-sm text-[#6a6a80]">No orders yet</div>
                 ) : (
                   <div className="divide-y divide-rim">
                     {stats.recentOrders.map((o) => (
-                      <div key={o.id} className="flex items-center justify-between px-5 py-3 hover:bg-raised/50 transition-colors">
+                      <div key={o.id} className="flex items-center justify-between px-5 py-3 hover:bg-[#22222f]/50 transition-colors">
                         <div>
-                          <div className="text-sm font-mono text-hi">{o.orderNumber}</div>
-                          <div className="text-xs text-lo">{o.type?.replace('_', ' ')}</div>
+                          <div className="text-sm font-mono text-[#f0f0f5]">{o.orderNumber}</div>
+                          <div className="text-xs text-[#6a6a80]">{o.type?.replace('_', ' ')}</div>
                         </div>
-                        <div className="text-sm text-success font-medium">${o.total.toFixed(2)}</div>
+                        <div className="text-sm text-emerald-500 font-medium">${o.total.toFixed(2)}</div>
                       </div>
                     ))}
                   </div>
@@ -174,20 +174,20 @@ export default function DashboardPage() {
               </div>
 
               {/* Active Kitchen Tickets */}
-              <div className="rounded-lg border border-rim bg-surface overflow-hidden">
-                <div className="border-b border-rim px-5 py-3.5 flex items-center justify-between">
-                  <span className="text-sm font-medium text-hi">Kitchen Tickets</span>
-                  <span className="text-xs text-lo">{stats.activeKdsTickets.length} active</span>
+              <div className="rounded-lg border border-[#2a2a3a] bg-[#12121a] overflow-hidden">
+                <div className="border-b border-[#2a2a3a] px-5 py-3.5 flex items-center justify-between">
+                  <span className="text-sm font-medium text-[#f0f0f5]">Kitchen Tickets</span>
+                  <span className="text-xs text-[#6a6a80]">{stats.activeKdsTickets.length} active</span>
                 </div>
                 {stats.activeKdsTickets.length === 0 ? (
-                  <div className="px-5 py-10 text-center text-sm text-lo">No active tickets</div>
+                  <div className="px-5 py-10 text-center text-sm text-[#6a6a80]">No active tickets</div>
                 ) : (
                   <div className="divide-y divide-rim">
                     {stats.activeKdsTickets.map((t) => (
-                      <div key={t.id} className="flex items-center justify-between px-5 py-3 hover:bg-raised/50 transition-colors">
+                      <div key={t.id} className="flex items-center justify-between px-5 py-3 hover:bg-[#22222f]/50 transition-colors">
                         <div>
-                          <div className="text-sm font-mono text-hi">{t.ticketNumber}</div>
-                          <div className="text-xs text-lo">
+                          <div className="text-sm font-mono text-[#f0f0f5]">{t.ticketNumber}</div>
+                          <div className="text-xs text-[#6a6a80]">
                             {t.tableLabel || 'No table'} · {t.items} items
                           </div>
                         </div>
@@ -203,17 +203,17 @@ export default function DashboardPage() {
 
             {/* Alert panel */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="border-l-2 border-warning bg-warning/5 rounded-r-lg px-4 py-3 border border-l-warning border-rim">
-                <div className="text-xs font-medium text-warning">Low Inventory Alert</div>
-                <div className="text-xs text-lo mt-1">3 items below reorder threshold</div>
+              <div className="border-l-2 border-warning bg-warning/5 rounded-r-lg px-4 py-3 border border-l-warning border-[#2a2a3a]">
+                <div className="text-xs font-medium text-amber-500">Low Inventory Alert</div>
+                <div className="text-xs text-[#6a6a80] mt-1">3 items below reorder threshold</div>
               </div>
-              <div className="border-l-2 border-info bg-info/5 rounded-r-lg px-4 py-3 border border-l-info border-rim">
-                <div className="text-xs font-medium text-info">Kitchen Load</div>
-                <div className="text-xs text-lo mt-1">{stats.activeTickets} active ticket{stats.activeTickets !== 1 ? 's' : ''} in queue</div>
+              <div className="border-l-2 border-info bg-info/5 rounded-r-lg px-4 py-3 border border-l-info border-[#2a2a3a]">
+                <div className="text-xs font-medium text-blue-500">Kitchen Load</div>
+                <div className="text-xs text-[#6a6a80] mt-1">{stats.activeTickets} active ticket{stats.activeTickets !== 1 ? 's' : ''} in queue</div>
               </div>
-              <div className="border-l-2 border-success bg-success/5 rounded-r-lg px-4 py-3 border border-l-success border-rim">
-                <div className="text-xs font-medium text-success">Floor Status</div>
-                <div className="text-xs text-lo mt-1">{stats.tablesOccupied}/{stats.tablesTotal} tables occupied</div>
+              <div className="border-l-2 border-success bg-emerald-500/5 rounded-r-lg px-4 py-3 border border-l-success border-[#2a2a3a]">
+                <div className="text-xs font-medium text-emerald-500">Floor Status</div>
+                <div className="text-xs text-[#6a6a80] mt-1">{stats.tablesOccupied}/{stats.tablesTotal} tables occupied</div>
               </div>
             </div>
           </>

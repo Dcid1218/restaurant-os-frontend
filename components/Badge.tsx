@@ -3,11 +3,11 @@ import { ReactNode } from 'react';
 type Variant = 'success' | 'warning' | 'danger' | 'info' | 'neutral';
 
 const variantClasses: Record<Variant, string> = {
-  success: 'bg-success/10 text-success border border-success/20',
-  warning: 'bg-warning/10 text-warning border border-warning/20',
-  danger: 'bg-danger/10 text-danger border border-danger/20',
-  info: 'bg-info/10 text-info border border-info/20',
-  neutral: 'bg-raised text-mid border border-edge',
+  success: 'bg-emerald-500/10 text-emerald-500 border border-success/20',
+  warning: 'bg-amber-500/10 text-amber-500 border border-warning/20',
+  danger: 'bg-red-500/10 text-red-500 border border-danger/20',
+  info: 'bg-blue-500/10 text-blue-500 border border-info/20',
+  neutral: 'bg-[#22222f] text-[#a0a0b8] border border-[#3a3a4f]',
 };
 
 type BadgeProps = {
