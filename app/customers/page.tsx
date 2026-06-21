@@ -123,7 +123,7 @@ export default function CustomersPage() {
         </div>
 
         {error && (
-          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
+          <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
         )}
 
         {/* Summary */}

@@ -137,7 +137,7 @@ export default function MenuPage() {
               key={cat.id}
               onClick={() => setActiveCategory(activeCategory === cat.name ? 'all' : cat.name)}
               className={`bg-slate-900 border rounded-lg p-3 text-left transition-colors ${
-                activeCategory === cat.name ? 'border-accent bg-indigo-500/5' : 'border-slate-700 hover:border-slate-600'
+                activeCategory === cat.name ? 'border-indigo-500 bg-indigo-500/10' : 'border-slate-700 hover:border-slate-600'
               }`}
             >
               <div className="text-sm font-medium text-white">{cat.name}</div>

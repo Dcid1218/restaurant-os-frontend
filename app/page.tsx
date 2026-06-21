@@ -51,10 +51,10 @@ export default function DashboardPage() {
           <div className="rounded-lg border border-slate-700 bg-slate-900 p-5">
             <div className="text-sm font-medium text-white">Alerts</div>
             <div className="mt-3 space-y-2">
-              <div className="border-l-2 border-warning rounded-r-md bg-warning/5 px-3 py-2 text-xs text-amber-500">
+              <div className="border-l-2 border-amber-500 rounded-r-md bg-amber-500/10 px-3 py-2 text-xs text-amber-500">
                 Low inventory: House-made ranch
               </div>
-              <div className="border-l-2 border-danger rounded-r-md bg-danger/5 px-3 py-2 text-xs text-red-500">
+              <div className="border-l-2 border-red-500 rounded-r-md bg-red-500/10 px-3 py-2 text-xs text-red-500">
                 Overtime risk: prep station
               </div>
             </div>

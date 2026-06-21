@@ -255,7 +255,7 @@ export default function POSPage() {
             <button
               onClick={submitOrder}
               disabled={cart.length === 0}
-              className="w-full py-2.5 rounded-md text-sm font-semibold bg-indigo-500 hover:bg-indigo-500-light disabled:opacity-40 disabled:cursor-not-allowed text-white transition-colors duration-150"
+              className="w-full py-2.5 rounded-md text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white transition-colors duration-150"
             >
               Send to Kitchen
             </button>

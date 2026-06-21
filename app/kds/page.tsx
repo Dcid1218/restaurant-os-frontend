@@ -28,11 +28,11 @@ interface Ticket {
 const API = 'http://localhost:4000/api/v1';
 
 const TICKET_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success' | 'neutral' | 'danger'; border: string; bg: string }> = {
-  PENDING: { badge: 'warning', border: 'border-warning/40', bg: 'bg-warning/5' },
-  IN_PROGRESS: { badge: 'info', border: 'border-info/40', bg: 'bg-info/5' },
-  READY: { badge: 'success', border: 'border-success/40', bg: 'bg-emerald-500/5' },
+  PENDING: { badge: 'warning', border: 'border-amber-500/40', bg: 'bg-amber-500/10' },
+  IN_PROGRESS: { badge: 'info', border: 'border-blue-500/40', bg: 'bg-blue-500/10' },
+  READY: { badge: 'success', border: 'border-emerald-500/40', bg: 'bg-emerald-500/10' },
   COMPLETED: { badge: 'neutral', border: 'border-slate-700', bg: 'bg-slate-900/50' },
-  CANCELLED: { badge: 'danger', border: 'border-danger/40', bg: 'bg-danger/5' },
+  CANCELLED: { badge: 'danger', border: 'border-red-500/40', bg: 'bg-red-500/10' },
 };
 
 const ITEM_STATUS_CONFIG: Record<string, { badge: 'info' | 'warning' | 'success' | 'neutral' | 'danger' }> = {
@@ -241,7 +241,7 @@ export default function KDSPage() {
                     {ticket.status === 'PENDING' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'IN_PROGRESS')}
-                        className="flex-1 py-2 rounded-lg bg-blue-500/10 hover:bg-info text-blue-500 hover:text-white text-sm font-semibold border border-info/30 transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-blue-500/10 hover:bg-blue-600 text-blue-500 hover:text-white text-sm font-semibold border border-blue-500/30 transition-colors"
                       >
                         Start
                       </button>
@@ -249,7 +249,7 @@ export default function KDSPage() {
                     {ticket.status === 'IN_PROGRESS' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'READY')}
-                        className="flex-1 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white text-sm font-semibold border border-success/30 transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-600 text-emerald-500 hover:text-white text-sm font-semibold border border-emerald-500/30 transition-colors"
                       >
                         Ready
                       </button>
@@ -257,14 +257,14 @@ export default function KDSPage() {
                     {ticket.status === 'READY' && (
                       <button
                         onClick={() => updateTicketStatus(ticket.id, 'COMPLETED')}
-                        className="flex-1 py-2 rounded-lg bg-slate-700 hover:bg-edge text-slate-400 hover:text-white text-sm font-semibold border border-slate-600 transition-colors"
+                        className="flex-1 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-400 hover:text-white text-sm font-semibold border border-slate-600 transition-colors"
                       >
                         Complete
                       </button>
                     )}
                     <button
                       onClick={() => updateTicketStatus(ticket.id, 'CANCELLED')}
-                      className="px-3 py-2 rounded-lg bg-danger/5 hover:bg-danger text-red-500 hover:text-white text-sm border border-danger/20 transition-colors"
+                      className="px-3 py-2 rounded-lg bg-red-500/10 hover:bg-red-600 text-red-500 hover:text-white text-sm border border-red-500/20 transition-colors"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

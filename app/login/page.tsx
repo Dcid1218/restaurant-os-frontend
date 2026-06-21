@@ -40,7 +40,7 @@ export default function LoginPage() {
       <div className="relative w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-500/10 border border-accent/20 mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-4">
             <svg className="w-7 h-7 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-1.2 5.4-5 9-9 9 4 0 7.8 3.6 9 9 1.2-5.4 5-9 9-9-4 0-7.8-3.6-9-9z" />
             </svg>
@@ -52,7 +52,7 @@ export default function LoginPage() {
         {/* Card */}
         <div className="bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-2xl">
           {error && (
-            <div className="mb-4 flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg px-4 py-3">
+            <div className="mb-4 flex items-start gap-3 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3">
               <svg className="w-4 h-4 text-red-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
               </svg>
@@ -94,7 +94,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 bg-indigo-500 hover:bg-indigo-500-light disabled:opacity-50 disabled:cursor-not-allowed rounded-md text-sm font-semibold text-white transition-colors duration-150 mt-2"
+              className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-md text-sm font-semibold text-white transition-colors duration-150 mt-2"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">

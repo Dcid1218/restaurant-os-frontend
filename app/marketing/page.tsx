@@ -137,7 +137,7 @@ export default function MarketingPage() {
         </div>
 
         {error && (
-          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
+          <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
         )}
 
         {loading ? (
@@ -154,7 +154,7 @@ export default function MarketingPage() {
                 <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Spend</div>
                 <div className="mt-2 text-2xl font-semibold text-white">${summary.totalSpend.toLocaleString()}</div>
               </div>
-              <div className="bg-slate-900 border border-success/30 rounded-lg p-5 bg-emerald-500/5">
+              <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-5">
                 <div className="text-xs font-medium text-emerald-500 uppercase tracking-wider">ROI</div>
                 <div className="mt-2 text-2xl font-semibold text-emerald-500">{summary.roi}x</div>
               </div>

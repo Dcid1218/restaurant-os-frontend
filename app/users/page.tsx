@@ -118,7 +118,7 @@ export default function UsersPage() {
         </div>
 
         {error && (
-          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
+          <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
         )}
 
         {/* Tabs */}
@@ -132,7 +132,7 @@ export default function UsersPage() {
               onClick={() => setTab(key as 'users' | 'org')}
               className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
                 tab === key
-                  ? 'text-indigo-500 border-accent'
+                  ? 'text-indigo-500 border-indigo-500'
                   : 'text-slate-500 border-transparent hover:text-slate-400'
               }`}
             >

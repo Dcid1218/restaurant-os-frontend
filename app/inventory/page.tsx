@@ -134,7 +134,7 @@ export default function InventoryPage() {
         </div>
 
         {error && (
-          <div className="bg-danger/5 border border-danger/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
+          <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3 text-sm text-red-500">{error}</div>
         )}
 
         {/* Summary cards */}
@@ -143,11 +143,11 @@ export default function InventoryPage() {
             <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Items</div>
             <div className="mt-2 text-2xl font-semibold text-white">{items.length}</div>
           </div>
-          <div className="bg-slate-900 border border-warning/30 rounded-lg p-5 bg-warning/5">
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-5">
             <div className="text-xs font-medium text-amber-500 uppercase tracking-wider">Low Stock</div>
             <div className="mt-2 text-2xl font-semibold text-amber-500">{lowStock.length}</div>
           </div>
-          <div className="bg-slate-900 border border-danger/30 rounded-lg p-5 bg-danger/5">
+          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-5">
             <div className="text-xs font-medium text-red-500 uppercase tracking-wider">Out of Stock</div>
             <div className="mt-2 text-2xl font-semibold text-red-500">{outOfStock.length}</div>
           </div>
@@ -195,9 +195,9 @@ export default function InventoryPage() {
         <div className="flex gap-2 flex-wrap">
           {[
             { key: 'all', label: `All (${items.length})`, active: 'bg-indigo-500 text-white' },
-            { key: 'low', label: `Low Stock (${lowStock.length})`, active: 'bg-warning text-white' },
-            { key: 'out', label: `Out (${outOfStock.length})`, active: 'bg-danger text-white' },
-            ...categories.map((cat) => ({ key: cat, label: cat, active: 'bg-info text-white' })),
+            { key: 'low', label: `Low Stock (${lowStock.length})`, active: 'bg-amber-500 text-white' },
+            { key: 'out', label: `Out (${outOfStock.length})`, active: 'bg-red-600 text-white' },
+            ...categories.map((cat) => ({ key: cat, label: cat, active: 'bg-blue-600 text-white' })),
           ].map(({ key, label, active }) => (
             <button
               key={key}

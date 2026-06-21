@@ -14,27 +14,27 @@ const accentConfig: Record<Accent, { glow: string; text: string; badge: string }
   indigo: {
     glow: 'bg-indigo-500/5',
     text: 'text-indigo-500',
-    badge: 'bg-indigo-500/10 text-indigo-500 border-accent/20',
+    badge: 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20',
   },
   green: {
     glow: 'bg-emerald-500/5',
     text: 'text-emerald-500',
-    badge: 'bg-emerald-500/10 text-emerald-500 border-success/20',
+    badge: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
   },
   amber: {
-    glow: 'bg-warning/5',
+    glow: 'bg-amber-500/5',
     text: 'text-amber-500',
-    badge: 'bg-amber-500/10 text-amber-500 border-warning/20',
+    badge: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
   },
   red: {
-    glow: 'bg-danger/5',
+    glow: 'bg-red-500/5',
     text: 'text-red-500',
-    badge: 'bg-red-500/10 text-red-500 border-danger/20',
+    badge: 'bg-red-500/10 text-red-500 border-red-500/20',
   },
   blue: {
-    glow: 'bg-info/5',
+    glow: 'bg-blue-500/5',
     text: 'text-blue-500',
-    badge: 'bg-blue-500/10 text-blue-500 border-info/20',
+    badge: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
   },
 };
 

@@ -20,31 +20,31 @@ const STATUS_CONFIG: Record<
 > = {
   available: {
     label: 'Available',
-    border: 'border-success/40',
-    bg: 'bg-emerald-500/5 hover:bg-emerald-500/10',
+    border: 'border-emerald-500/40',
+    bg: 'bg-emerald-500/10 hover:bg-emerald-500/20',
     text: 'text-emerald-500',
     dot: 'bg-emerald-500',
   },
   occupied: {
     label: 'Occupied',
-    border: 'border-danger/40',
-    bg: 'bg-danger/5 hover:bg-red-500/10',
+    border: 'border-red-500/40',
+    bg: 'bg-red-500/10 hover:bg-red-500/20',
     text: 'text-red-500',
-    dot: 'bg-danger',
+    dot: 'bg-red-500',
   },
   reserved: {
     label: 'Reserved',
-    border: 'border-warning/40',
-    bg: 'bg-warning/5 hover:bg-amber-500/10',
+    border: 'border-amber-500/40',
+    bg: 'bg-amber-500/10 hover:bg-amber-500/20',
     text: 'text-amber-500',
-    dot: 'bg-warning',
+    dot: 'bg-amber-500',
   },
   dirty: {
     label: 'Needs Cleaning',
     border: 'border-slate-600',
     bg: 'bg-slate-700/50 hover:bg-slate-700',
     text: 'text-slate-500',
-    dot: 'bg-dlo',
+    dot: 'bg-slate-500',
   },
 };
 
@@ -134,7 +134,7 @@ export default function TablesViewPage() {
             <div key={section}>
               <div className="flex items-center gap-3 mb-3">
                 <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest">{section}</h2>
-                <div className="flex-1 h-px bg-slate-700im" />
+                <div className="flex-1 h-px bg-slate-700" />
                 <span className="text-xs text-slate-500">{sectionTables.length} tables</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -154,7 +154,7 @@ export default function TablesViewPage() {
                       <div className={`text-xs font-medium mt-2 ${cfg.text}`}>{cfg.label}</div>
                       {table.orders.length > 0 && (
                         <div className="mt-1.5 flex items-center justify-center gap-1">
-                          <div className="w-1.5 h-1.5 rounded-full bg-danger animate-pulse" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                           <span className="text-xs text-red-500">Active</span>
                         </div>
                       )}

@@ -111,7 +111,7 @@ export default function ReportsPage() {
                       <button
                         onClick={() => handleGenerate(r.id)}
                         disabled={generating === r.id}
-                        className="w-full py-1.5 rounded-md text-xs font-medium bg-indigo-500/10 hover:bg-indigo-500 text-indigo-500 hover:text-white border border-accent/20 hover:border-indigo-500 disabled:opacity-50 transition-colors"
+                        className="w-full py-1.5 rounded-md text-xs font-medium bg-indigo-500/10 hover:bg-indigo-500 text-indigo-500 hover:text-white border border-indigo-500/20 hover:border-indigo-500 disabled:opacity-50 transition-colors"
                       >
                         {generating === r.id ? 'Generating...' : 'Generate Report'}
                       </button>

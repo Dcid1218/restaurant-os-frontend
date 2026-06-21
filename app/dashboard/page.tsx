@@ -203,15 +203,15 @@ export default function DashboardPage() {
 
             {/* Alert panel */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="border-l-2 border-warning bg-warning/5 rounded-r-lg px-4 py-3 border border-l-warning border-slate-700">
+              <div className="rounded-lg border border-slate-800 border-l-4 border-l-amber-500 bg-amber-500/10 px-4 py-3">
                 <div className="text-xs font-medium text-amber-500">Low Inventory Alert</div>
                 <div className="text-xs text-slate-500 mt-1">3 items below reorder threshold</div>
               </div>
-              <div className="border-l-2 border-info bg-info/5 rounded-r-lg px-4 py-3 border border-l-info border-slate-700">
+              <div className="rounded-lg border border-slate-800 border-l-4 border-l-blue-500 bg-blue-500/10 px-4 py-3">
                 <div className="text-xs font-medium text-blue-500">Kitchen Load</div>
                 <div className="text-xs text-slate-500 mt-1">{stats.activeTickets} active ticket{stats.activeTickets !== 1 ? 's' : ''} in queue</div>
               </div>
-              <div className="border-l-2 border-success bg-emerald-500/5 rounded-r-lg px-4 py-3 border border-l-success border-slate-700">
+              <div className="rounded-lg border border-slate-800 border-l-4 border-l-emerald-500 bg-emerald-500/10 px-4 py-3">
                 <div className="text-xs font-medium text-emerald-500">Floor Status</div>
                 <div className="text-xs text-slate-500 mt-1">{stats.tablesOccupied}/{stats.tablesTotal} tables occupied</div>
               </div>
