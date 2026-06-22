@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { AuthProvider } from '@/lib/auth';
 import { ToastProvider } from '@/lib/toast';
 import ToastContainer from '@/components/Toast';
+import './globals.css';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
